@@ -25,3 +25,29 @@ E:\Projects\Personal\Amawathura\MahameghaDharmaDaana\MahameghaDharmaDaana\obj\x8
 E:\Projects\Personal\Amawathura\MahameghaDharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Forms.frmCategory.resources
 E:\Projects\Personal\Amawathura\MahameghaDharmaDaana\MahameghaDharmaDaana\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
 E:\Projects\Personal\Amawathura\MahameghaDharmaDaana\MahameghaDharmaDaana\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\YBS.exe.config
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.exe
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.pdb
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\YBS.exe
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\YBS.pdb
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\DBCore.dll
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\DBCore.pdb
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\MahameghaDharmaDaana.csprojResolveAssemblyReference.cache
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Admin.frmLoginWindow.resources
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Common.frmSearch.resources
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Common.frmMsgOkOnly.resources
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Common.frmMsgYesNo.resources
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Forms.frmPayments.resources
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Forms.frmMemberNDF.resources
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Forms.frmAddress.resources
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Forms.frmPublish.resources
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Forms.frmCategory.resources
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Forms.frmUser.resources
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.MDIParent1.resources
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Properties.Resources.resources
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\MahameghaDharmaDaana.csproj.GenerateResource.Cache
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\MySql.Data.dll
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\Google.Protobuf.dll
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\MySql.Data.xml

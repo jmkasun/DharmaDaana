@@ -18,3 +18,11 @@ E:\Projects\Personal\Amawathura\MahameghaDharmaDaana\DBCore\bin\Debug\DBCore.pdb
 E:\Projects\Personal\Amawathura\MahameghaDharmaDaana\DBCore\obj\Debug\DBCore.csprojResolveAssemblyReference.cache
 E:\Projects\Personal\Amawathura\MahameghaDharmaDaana\DBCore\obj\Debug\DBCore.dll
 E:\Projects\Personal\Amawathura\MahameghaDharmaDaana\DBCore\obj\Debug\DBCore.pdb
+D:\Projects Kasun\DharmaDaana\DBCore\bin\Debug\DBCore.dll
+D:\Projects Kasun\DharmaDaana\DBCore\bin\Debug\DBCore.pdb
+D:\Projects Kasun\DharmaDaana\DBCore\obj\Debug\DBCore.csprojResolveAssemblyReference.cache
+D:\Projects Kasun\DharmaDaana\DBCore\obj\Debug\DBCore.dll
+D:\Projects Kasun\DharmaDaana\DBCore\obj\Debug\DBCore.pdb
+D:\Projects Kasun\DharmaDaana\DBCore\bin\Debug\MySql.Data.dll
+D:\Projects Kasun\DharmaDaana\DBCore\bin\Debug\Google.Protobuf.dll
+D:\Projects Kasun\DharmaDaana\DBCore\bin\Debug\MySql.Data.xml
