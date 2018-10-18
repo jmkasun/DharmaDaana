@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace YBS.Forms
+{
+    public partial class frmPublish : DevComponents.DotNetBar.Office2007Form
+    {
+        DBCore.UserLevel userLevel = DBCore.UserLevel.SystemUser;
+
+        public frmPublish(int permissionLevel)
+        {
+            userLevel = (DBCore.UserLevel)permissionLevel;
+            InitializeComponent();
+        }
+
+        private void frmPublish_Load(object sender, EventArgs e)
+        {
+            yearText.Text = DateTime.Now.Year.ToString();
+            monthCombo.SelectedIndex = DateTime.Now.Month - 1;
+        }
+    }
+}

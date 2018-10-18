@@ -1,0 +1,266 @@
+﻿namespace YBS.Forms
+{
+    partial class frmPublish
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
+            this.monthCombo = new System.Windows.Forms.ComboBox();
+            this.yearText = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.addbtn = new DevComponents.DotNetBar.ButtonX();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.adressGrid = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.panelEx1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.adressGrid)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // panelEx1
+            // 
+            this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx1.Controls.Add(this.adressGrid);
+            this.panelEx1.Controls.Add(this.groupBox1);
+            this.panelEx1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelEx1.Location = new System.Drawing.Point(0, 0);
+            this.panelEx1.Name = "panelEx1";
+            this.panelEx1.Size = new System.Drawing.Size(758, 567);
+            this.panelEx1.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelEx1.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelEx1.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelEx1.Style.GradientAngle = 90;
+            this.panelEx1.TabIndex = 0;
+            // 
+            // monthCombo
+            // 
+            this.monthCombo.Font = new System.Drawing.Font("Arial", 12F);
+            this.monthCombo.FormattingEnabled = true;
+            this.monthCombo.Items.AddRange(new object[] {
+            "ජනවාරි",
+            "පෙබරවාරි",
+            "මාර්තු",
+            "අප්‍රේල්",
+            "මැයි",
+            "ජූනි",
+            "ජූලි",
+            "අගෝස්තු",
+            "සැප්තැම්බර්",
+            "ඔක්තෝම්බර්",
+            "නොවැම්බර්",
+            "දෙසැම්බර්"});
+            this.monthCombo.Location = new System.Drawing.Point(268, 21);
+            this.monthCombo.Name = "monthCombo";
+            this.monthCombo.Size = new System.Drawing.Size(143, 26);
+            this.monthCombo.TabIndex = 106;
+            this.monthCombo.TabStop = false;
+            // 
+            // yearText
+            // 
+            this.yearText.Font = new System.Drawing.Font("Arial", 12F);
+            this.yearText.Location = new System.Drawing.Point(89, 21);
+            this.yearText.Name = "yearText";
+            this.yearText.ReadOnly = true;
+            this.yearText.Size = new System.Drawing.Size(87, 26);
+            this.yearText.TabIndex = 105;
+            this.yearText.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(200, 24);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 18);
+            this.label3.TabIndex = 103;
+            this.label3.Text = "මාසය";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(21, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 18);
+            this.label1.TabIndex = 104;
+            this.label1.Text = "වර්ෂය";
+            // 
+            // addbtn
+            // 
+            this.addbtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.addbtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.addbtn.Location = new System.Drawing.Point(593, 12);
+            this.addbtn.Name = "addbtn";
+            this.addbtn.Size = new System.Drawing.Size(111, 41);
+            this.addbtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.addbtn.TabIndex = 107;
+            this.addbtn.Text = "Select";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.addbtn);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.monthCombo);
+            this.groupBox1.Controls.Add(this.yearText);
+            this.groupBox1.Location = new System.Drawing.Point(18, 4);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(710, 59);
+            this.groupBox1.TabIndex = 108;
+            this.groupBox1.TabStop = false;
+            // 
+            // adressGrid
+            // 
+            this.adressGrid.AllowUserToAddRows = false;
+            this.adressGrid.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.adressGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.adressGrid.ColumnHeadersHeight = 30;
+            this.adressGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.address,
+            this.number});
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.adressGrid.DefaultCellStyle = dataGridViewCellStyle8;
+            this.adressGrid.Location = new System.Drawing.Point(16, 72);
+            this.adressGrid.Name = "adressGrid";
+            this.adressGrid.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.adressGrid.Size = new System.Drawing.Size(730, 472);
+            this.adressGrid.TabIndex = 109;
+            this.adressGrid.TabStop = false;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 50;
+            // 
+            // address
+            // 
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.address.DefaultCellStyle = dataGridViewCellStyle6;
+            this.address.FillWeight = 149.2386F;
+            this.address.HeaderText = "ලිපිනය";
+            this.address.MinimumWidth = 490;
+            this.address.Name = "address";
+            this.address.Width = 540;
+            // 
+            // number
+            // 
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.number.DefaultCellStyle = dataGridViewCellStyle7;
+            this.number.FillWeight = 50.76142F;
+            this.number.HeaderText = "ප්‍රමාණය";
+            this.number.MinimumWidth = 100;
+            this.number.Name = "number";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Font = new System.Drawing.Font("UN-Emanee", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton1.Location = new System.Drawing.Point(433, 13);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(107, 17);
+            this.radioButton1.TabIndex = 108;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "පුද්ගලික ලිපිනයන්";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Font = new System.Drawing.Font("UN-Emanee", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton2.Location = new System.Drawing.Point(433, 35);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(109, 17);
+            this.radioButton2.TabIndex = 108;
+            this.radioButton2.Text = "අනෙකුත් ලිපිනයන්";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // frmPublish
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(758, 567);
+            this.Controls.Add(this.panelEx1);
+            this.DoubleBuffered = true;
+            this.Name = "frmPublish";
+            this.Text = "frmPublish";
+            this.Load += new System.EventHandler(this.frmPublish_Load);
+            this.panelEx1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.adressGrid)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private DevComponents.DotNetBar.PanelEx panelEx1;
+        private System.Windows.Forms.ComboBox monthCombo;
+        private System.Windows.Forms.TextBox yearText;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private DevComponents.DotNetBar.ButtonX addbtn;
+        private System.Windows.Forms.DataGridView adressGrid;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn number;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+    }
+}

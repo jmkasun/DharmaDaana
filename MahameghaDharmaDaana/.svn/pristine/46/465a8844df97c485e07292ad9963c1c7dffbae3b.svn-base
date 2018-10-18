@@ -1,0 +1,229 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using DBCore.Classes;
+using YBS.Common;
+using System.Collections;
+
+namespace YBS.Forms
+{
+    public partial class frmAddress : DevComponents.DotNetBar.Office2007Form
+    {
+        int occuID = 0;
+        DBCore.UserLevel userLevel = DBCore.UserLevel.SystemUser;
+
+        public frmAddress(int permissionLevel)
+        {
+            userLevel = (DBCore.UserLevel)permissionLevel;
+            InitializeComponent();
+        }
+
+        private void addbtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ValidateBeforeAdd())
+                {
+                    using (OtherAddress addr = new OtherAddress(true))
+                    {
+
+                        setFieldValues(addr);
+
+                        if (occuID == 0)
+                        {
+                            if (addr.Add() == 1)
+                            {
+                               // MessageView.ShowMsg("Sucessfully Added");
+
+                                //errorProvider1.SetError(idTxt, string.Empty);
+                                //errorProvider1.SetError(nameTxt, string.Empty);
+                                statusText.Visible = true;
+                                timer1.Enabled = true;
+
+                                clear();
+                            }
+
+                        }
+                        else
+                        {
+                            addr.ID = occuID;
+
+                            if (MessageView.ShowQuestionMsg("Update Address") == DialogResult.OK)
+                            {
+
+                                if (addr.Update() == 1)
+                                {
+                                    MessageView.ShowMsg("Sucessfully Updated");
+
+                                    //errorProvider1.SetError(idTxt, string.Empty);
+                                    //errorProvider1.SetError(nameTxt, string.Empty);
+
+                                    clear();
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageView.ShowErrorMsg(ex.Message);
+            }
+        }
+
+        private void setFieldValues(OtherAddress addr)
+        {
+            addr.OrderNumber = Int32.Parse(orderNumText.Text);
+            addr.placeName = placeNameText.Text;
+            addr.Address = sentaAddressTextbox.Text;
+            addr.numOfMag = (int)numOfMagText.Value;
+            addr.ContactName = contactNameText.Text;
+            addr.Mobile = mobileText.Text;
+            addr.Land = homeTpText.Text;
+        }
+
+        private void clear()
+        {
+            occuID = 0;
+            addbtn.Text = "Insert";
+            deleteBtn.Enabled = false;
+
+            placeNameText.Clear();
+            sentaAddressTextbox.Clear();
+            contactNameText.Clear();
+            mobileText.Clear();
+            homeTpText.Clear();
+
+            orderNumText.Text = getNextOrderNumber().ToString();
+
+
+            setUserPermissions();
+        }
+
+        private bool ValidateBeforeAdd()
+        {
+            return true;
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            using (OtherAddress occu = new OtherAddress(true))
+            {
+                occu.ID = occuID;
+
+                //if (MessageView.ShowQuestionMsg("Delete Details of '" + nameTextBoxX.Text + "'") == DialogResult.OK)
+                //{
+                //    occu.Delete();
+                //    clear();
+                //    MessageView.ShowMsg("Sucessfully Deleted");
+                //}
+            }
+        }
+
+        private void cancelbtn_Click(object sender, EventArgs e)
+        {
+            clear();
+        }
+
+        private void findButton_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                using (OtherAddress addre = new OtherAddress(true))
+                {
+                    setFieldValues(addre);
+
+                    DataTable ds = addre.SelectFind();
+                    frmSearch frmSub = new frmSearch(ds, this.Text,3,50);
+                    frmSub.Width = 800;
+                    HandleSearch(frmSub);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageView.ExceptionError(ex);
+            }
+        }
+
+        // hadle operations after search
+        private void HandleSearch(frmSearch frmSub)
+        {
+            //ApplicationSettings.ChildFormView(this.MdiParent, ref frmSub);
+            if (frmSub.ShowDialog() == DialogResult.OK)
+            {
+                FillSearchFilds(frmSub.DataRowValues);
+
+                if (userLevel == DBCore.UserLevel.SystemAdmin || userLevel == DBCore.UserLevel.SystemUser_IUD)
+                {
+                    deleteBtn.Enabled = true;
+                    addbtn.Text = "Update";
+                }
+            }
+            frmSub.Dispose();
+        }
+
+        public void FillSearchFilds(Hashtable hashtable)
+        {
+            try
+            {
+                occuID = (int)hashtable["ID"];
+                //nameTextBoxX.Text = hashtable["Name"].ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageView.ExceptionError(ex);
+            }
+        }
+
+        private void setUserPermissions()
+        {
+            if (userLevel == DBCore.UserLevel.SystemUser)
+            {
+                addbtn.Enabled = deleteBtn.Enabled = false;
+            }
+
+            if (userLevel == DBCore.UserLevel.SystemUser_I)
+            {
+                addbtn.Enabled = true;
+                deleteBtn.Enabled = false;
+            }
+
+            if (userLevel == DBCore.UserLevel.SystemUser_IUD || userLevel == DBCore.UserLevel.SystemAdmin)
+            {
+                addbtn.Enabled =  true;
+            }
+        }
+
+        private void frmOccupatition_Load(object sender, EventArgs e)
+        {
+            setUserPermissions();
+            clear();
+        }
+
+        private void orderNumText_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            orderNumText.ReadOnly = false;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            statusText.Visible = false;
+            timer1.Enabled = false;
+        }
+
+        private int getNextOrderNumber()
+        {
+            using (OtherAddress occu = new OtherAddress(true))
+            {
+                return occu.getNextOrderNumber();
+            }
+        }
+    }
+}

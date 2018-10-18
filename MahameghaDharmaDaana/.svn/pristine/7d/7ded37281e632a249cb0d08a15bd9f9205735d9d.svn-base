@@ -1,0 +1,201 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using DBCore.Classes;
+
+namespace YBS.Forms
+{
+    public partial class frmPublish : DevComponents.DotNetBar.Office2007Form
+    {
+        int rowIndex = 0;
+        string fontName = "";
+        int fontSize = 14;
+        int x = 100;
+        int y = 100;
+
+
+        DBCore.UserLevel userLevel = DBCore.UserLevel.SystemUser;
+
+        public frmPublish(int permissionLevel)
+        {
+            userLevel = (DBCore.UserLevel)permissionLevel;
+            InitializeComponent();
+        }
+
+        private void frmPublish_Load(object sender, EventArgs e)
+        {
+            yearText.Text = DateTime.Now.Year.ToString();
+            monthCombo.SelectedIndex = DateTime.Now.Month - 1;
+        }
+
+        private void addbtn_Click(object sender, EventArgs e)
+        {
+            clear();
+           
+            if (privateAddressRadio.Checked)
+            {
+                using (MemberAddress memAdd = new MemberAddress(true))
+                {
+                    adressGrid.DataSource = memAdd.SelectForMonth(DateTime.Now);
+                }
+            }
+            else
+            {
+                using (OtherAddress otherAdd = new OtherAddress(true))
+                {
+                    adressGrid.DataSource = otherAdd.SelectForMonth(DateTime.Now);
+                }
+            }
+
+            setGridRownumber();
+        }
+
+
+        private void setGridRownumber()
+        {
+            int i = 1;
+            foreach (DataGridViewRow r in adressGrid.Rows)
+            {
+                r.HeaderCell.Value = (i++).ToString();
+            }
+        }
+
+        private void printButton_Click(object sender, EventArgs e)
+        {
+            if (printDialog1.ShowDialog() == DialogResult.OK)
+            {
+                printDialog1.Document = printDocument1;
+                printDocument1.DefaultPageSettings.Landscape = false;
+                printDocument1.Print();
+
+            }
+
+            clear();
+        }
+
+        private void clear()
+        {
+            rowIndex = 0;
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+
+            if (rowIndex == 0)
+            {
+                fontName = DBCore.Utility.GetAppsetting(DBCore.AppSetting.SinhalaFontName);
+                fontSize = Int32.Parse(DBCore.Utility.GetAppsetting(DBCore.AppSetting.fontSize));
+                x = 100;
+                y = 100;
+
+                try
+                {
+                    string[] configAddreslocation = DBCore.Utility.GetAppsetting(DBCore.AppSetting.AddressPrintLocation).Split(new char[] { '*' });
+                    x = Int32.Parse(configAddreslocation[0]);
+                    y = Int32.Parse(configAddreslocation[1]);
+
+
+                }
+                catch { }
+            }
+
+
+            if (adressGrid.Rows.Count > rowIndex)
+            {
+                while (true)
+                {
+
+                    if (adressGrid.Rows[rowIndex].Cells[0].Value.ToString() == "1")
+                    {
+
+                        string address = adressGrid.Rows[rowIndex].Cells[2].Value.ToString();
+
+                        TextRenderer.DrawText(e.Graphics, "යා යුතු:", new Font(fontName, (fontSize-1) * 6, FontStyle.Regular), new Rectangle(x-380, y-100, 400, 200), SystemColors.ControlText, TextFormatFlags.Left);
+                        TextRenderer.DrawText(e.Graphics, address, new Font(fontName, fontSize * 6, FontStyle.Regular), new Rectangle(x, y, 3000, 1000), SystemColors.ControlText, TextFormatFlags.Left);
+                        addPrintHistory((int)adressGrid.Rows[rowIndex].Cells[1].Value, privateAddressRadio.Checked ? 0 : 1, 1, DateTime.Now);
+
+                        rowIndex++;
+                        break;
+                    }
+
+                    rowIndex++;
+                }
+
+                e.HasMorePages = true;                
+                return;
+
+            }
+
+
+
+        }
+
+        private void addPrintHistory(int addressID, int addressType, int count, DateTime sentDate)
+        {
+
+            using (PublicationSentHistory his = new PublicationSentHistory(true))
+            {
+                his.AddressID = addressID;
+                his.AddressType = addressType;
+                his.SentCount = count;
+                his.sentDate = sentDate;
+
+                his.Add();
+
+            }
+        }
+
+
+
+        private void adressGrid_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                bool selectAll = false;
+
+                if (adressGrid.Columns[0].HeaderCell.Value.ToString() == "Select All")
+                {
+                    selectAll = true;
+                    adressGrid.Columns[0].HeaderCell.Value = "Deselect All";
+                }
+                else
+                {
+                    adressGrid.Columns[0].HeaderCell.Value = "Select All";
+                }
+
+                foreach (DataGridViewRow r in adressGrid.Rows)
+                {
+                    r.Cells[0].Value = selectAll;
+                }
+            }
+        }
+
+        private void radioCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow r in adressGrid.SelectedRows)
+            {
+                r.Cells[0].Value = 1;
+            }
+        }
+
+        private void radioUncheck_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow r in adressGrid.SelectedRows)
+            {
+                r.Cells[0].Value = 0;
+            }
+        }
+
+        private void adressGrid_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            radioCheck.Checked = radioUncheck.Checked = false;
+        }
+    }
+}
+

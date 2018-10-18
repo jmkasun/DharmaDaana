@@ -1,0 +1,847 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using DBCore.Classes;
+using YBS.Common;
+using System.Collections;
+using System.IO;
+using System.Drawing.Imaging;
+using System.Net.Mail;
+using DevComponents.Editors;
+
+
+namespace YBS.Forms
+{
+    public partial class frmMemberNDF : DevComponents.DotNetBar.Office2007Form
+    {
+        int memberID = 0;
+        byte[] imageData = null;
+        string emailString = string.Empty;
+        InputLanguage lan = null;// InputLanguage.CurrentInputLanguage;
+        string nextIndex = string.Empty;
+        List<int> findIDList = new List<int>();
+        int findListSelectedIndex = -1;
+        DBCore.UserLevel userLevel = DBCore.UserLevel.SystemUser;
+
+
+        public frmMemberNDF(int permissionLevel)
+        {
+            userLevel = (DBCore.UserLevel)permissionLevel;
+            InitializeComponent();
+        }
+
+        private void addbtn_Click(object sender, EventArgs e)
+        {
+
+            AddUpdate();
+        }
+
+        private void AddUpdate()
+        {
+            try
+            {
+
+                using (MemberInfo memInfo = new MemberInfo(true))
+                {
+                    if (ValidateBeforeAdd(memInfo))
+                    {
+
+                        memInfo.Name = nameTextBoxX.Text;
+                        memInfo.Address = addressTextbox.Text;
+                        memInfo.Mobile = mobileText.Text;
+                        memInfo.HomeTP = homeTpText.Text;
+                        memInfo.Email = emailText.Text;
+                        memInfo.regNumber = indexText.Text;
+                        memInfo.DataVerified = verifiedCheck.Checked ? 1 : 0;
+                        memInfo.Amount = (int)amountTxt.Value;
+                        memInfo.bank = (DBCore.Banks)bankCombo.SelectedIndex + 1;
+                        memInfo.paymentType = (DBCore.PaymentType)paymentTypeCombo.SelectedIndex + 1;
+                        memInfo.subscriptionType = (DBCore.SubscriptionType)subscriptionTypeCombo.SelectedIndex + 1;
+                        memInfo.nameInMag = nameInmagText.Text;
+
+                        addAddressToObject(memInfo);
+
+                        if (memberID == 0)
+                        {
+
+                            if (memInfo.Add() == 1)
+                            {
+                                ShowStatus("Successfully Added");
+                                nextIndex = memInfo.GetNextIndex();
+
+                                clear();
+                            }
+
+                        }
+                        else
+                        {
+                            memInfo.ID = memberID;
+
+                            if (MessageView.ShowQuestionMsg("Update Member info") == DialogResult.OK)
+                            {
+
+                                if (memInfo.Update() == 1)
+                                {
+                                    ShowStatus("Successfully Updated");
+
+                                    clear();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // SetIndexField();
+            }
+            catch (Exception ex)
+            {
+                MessageView.ShowErrorMsg(ex.Message);
+            }
+        }
+
+        private void ShowStatus(string text)
+        {
+            statusText.Text = text;
+            statusText.Visible = true;
+            timer1.Enabled = true;
+        }
+
+        private void addAddressToObject(MemberInfo memInfo)
+        {
+            memInfo.sentAddress = new List<MemberAddress>();
+
+            if (adressGrid.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow row in adressGrid.Rows)
+                {
+                    memInfo.sentAddress.Add(new MemberAddress((int)row.Cells[1].Value, row.Cells[0].Value.ToString(), 0, (int)row.Cells[2].Value));
+                }
+            }
+        }
+
+
+        private void SetIndexField()
+        {
+            if (string.IsNullOrEmpty(nextIndex))
+            {
+                using (MemberInfo mem = new MemberInfo(true))
+                {
+                    nextIndex = mem.GetNextIndex();
+                }
+            }
+
+            indexText.Text = nextIndex;
+        }
+
+        private void clear()
+        {
+            memberID = 0;
+            addbtn.Text = "Insert";
+            deleteBtn.Enabled = false;
+
+            nameTextBoxX.Clear();
+            addressTextbox.Clear();
+
+            homeTpText.Clear();
+            emailText.Clear();
+            mobileText.Clear();
+            emailString = string.Empty;
+            indexText.ReadOnly = false;
+            
+            nextBtn.Visible = false;
+            prevBtn.Visible = false;
+            findIDList.Clear();
+            amountTxt.Value = 0;
+            nameInmagText.Clear();
+
+            findListSelectedIndex = -1;
+            bankCombo.SelectedIndex = paymentTypeCombo.SelectedIndex = subscriptionTypeCombo.SelectedIndex = -1;
+            bankCombo.Enabled = false;
+            indexText.ReadOnly = true;
+
+            verifiedCheck.CheckState = CheckState.Indeterminate;
+
+            setUserPermissions();
+            adressGrid.Rows.Clear();
+            nameTextBoxX.Focus();
+            SetIndexField();
+        }
+
+        private bool ValidateBeforeAdd(MemberInfo member)
+        {
+            bool retVal = true;
+
+
+            if (string.IsNullOrEmpty(indexText.Text))
+            {
+                errorProvider1.SetError(indexText, "Index Number cannot be empty");
+                retVal = false;
+            }
+            else
+            {
+                //if ((nicIndexValidator == 4 || nicIndexValidator == 3))
+                //{
+                //    errorProvider1.SetError(indexText, "Duplicate Index number");
+                //    retVal = false;
+                //}
+                //else
+                //{
+                //    errorProvider1.SetError(indexText, string.Empty);
+                //}
+            }
+
+            nameTextBoxX.Text = nameTextBoxX.Text.Replace("\n", "").Replace("\r", "");
+
+            if (string.IsNullOrEmpty(nameTextBoxX.Text))
+            {
+                errorProvider1.SetError(nameTextBoxX, "Name cannot be empty");
+                retVal = false;
+            }
+            else
+            {
+                errorProvider1.SetError(nameTextBoxX, string.Empty);
+            }
+
+
+            if (amountTxt.Value == 0)
+            {
+                errorProvider1.SetError(amountTxt, "Cannot be empty");
+                retVal = false;
+            }
+            else
+            {
+                errorProvider1.SetError(amountTxt, string.Empty);
+            }
+
+            if (!string.IsNullOrEmpty(emailText.Text) && !Utility.IsValidEmailAddress(emailText.Text))
+            {
+                retVal = false;
+                errorProvider1.SetError(emailText, "Invalied 'Email Address'");
+            }
+            else
+            {
+                errorProvider1.SetError(emailText, string.Empty);
+            }
+
+            if (Utility.IsValiedPhoneNumber(mobileText.Text))
+            {
+                errorProvider1.SetError(mobileText, string.Empty);
+
+            }
+            else
+            {
+                retVal = false;
+                errorProvider1.SetError(mobileText, "Invalied Number");
+            }
+
+
+            if (Utility.IsValiedPhoneNumber(homeTpText.Text))
+            {
+                errorProvider1.SetError(homeTpText, string.Empty);
+            }
+            else
+            {
+                retVal = false;
+                errorProvider1.SetError(homeTpText, "Invalied Number");
+            }
+
+
+            return retVal;
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            using (MemberInfo member = new MemberInfo(true))
+            {
+                member.ID = memberID;
+
+                if (MessageView.ShowQuestionMsg("Delete Details of '" + nameTextBoxX.Text + "'") == DialogResult.OK)
+                {
+                    member.Delete();
+                    clear();
+                    MessageView.ShowMsg("Sucessfully Deleted");
+                }
+            }
+
+            SetIndexField();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                Font sinhalaFont = new System.Drawing.Font(DBCore.Utility.GetAppsetting(DBCore.AppSetting.SinhalaFontName), 12);
+
+               nameTextBoxX.Font = addressTextbox.Font = nameInmagText.Font = sentaAddressTextbox.Font = sinhalaFont;
+
+            }
+            catch { }
+
+
+
+
+
+            SetIndexField();
+            indexText.SelectionStart = 15;
+
+
+            setUserPermissions();
+        }
+
+        private void setUserPermissions()
+        {
+            if (userLevel == DBCore.UserLevel.SystemUser)
+            {
+                addbtn.Enabled = deleteBtn.Enabled = false;
+            }
+
+            if (userLevel == DBCore.UserLevel.SystemUser_I)
+            {
+                addbtn.Enabled = true;
+                deleteBtn.Enabled = false;
+            }
+
+            if (userLevel == DBCore.UserLevel.SystemUser_IUD || userLevel == DBCore.UserLevel.SystemAdmin)
+            {
+                addbtn.Enabled = true;
+            }
+        }
+
+
+        private void cancelbtn_Click(object sender, EventArgs e)
+        {
+            if (MessageView.ShowQuestionMsg("Clear Data") == DialogResult.OK)
+            {
+                clear();
+            }
+        }
+
+        private void findButton_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                using (MemberInfo memInfo = new MemberInfo(true))
+                {
+
+                    memInfo.Name = nameTextBoxX.Text;
+                    memInfo.regNumber = indexText.Text;
+                    memInfo.Mobile = mobileText.Text;
+                    memInfo.HomeTP = homeTpText.Text;
+                    memInfo.Email = emailText.Text;
+                    memInfo.Address = addressTextbox.Text;
+
+                    switch (verifiedCheck.CheckState)
+                    {
+                        case CheckState.Checked:
+                            {
+                                memInfo.DataVerified = 1;
+                                break;
+                            }
+
+                        case CheckState.Unchecked:
+                            {
+                                memInfo.DataVerified = 0;
+                                break;
+                            }
+
+                        default:
+                            {
+                                memInfo.DataVerified = -1;
+                                break;
+                            }
+                    }
+
+
+                    if (indexText.Text == nextIndex)
+                    {
+                        memInfo.regNumber = string.Empty;
+                    }
+                    else
+                    {
+                        memInfo.regNumber = indexText.Text;
+                    }
+
+                    DataTable ds = memInfo.SelectFind();
+                    frmSearch frmSub = new frmSearch(ds, this.Text, 4,60);
+
+                    frmSub.Width = this.Width - 100;
+
+
+                    if (HandleSearch(frmSub))
+                    {
+                        AddFindIDsToList(ds, 4);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageView.ExceptionError(ex);
+            }
+        }
+
+        private void AddFindIDsToList(DataTable ds, int IDCell)
+        {
+            try
+            {
+                foreach (DataRow row in ds.Rows)
+                {
+                    int ID = Convert.ToInt32(row[IDCell]);
+                    findIDList.Add(ID);
+
+                    if (ID == memberID)
+                        findListSelectedIndex = findIDList.Count - 1;
+                }
+            }
+            catch { }
+        }
+
+        // hadle operations after search
+        private bool HandleSearch(frmSearch frmSub)
+        {
+            //ApplicationSettings.ChildFormView(this.MdiParent, ref frmSub);
+            if (frmSub.ShowDialog() == DialogResult.OK)
+            {
+                memberID = (int)frmSub.DataRowValues["ID"];
+                FillSearchFilds(memberID);
+
+                if (userLevel == DBCore.UserLevel.SystemAdmin || userLevel == DBCore.UserLevel.SystemUser_IUD)
+                {
+                    deleteBtn.Enabled = true;
+                    addbtn.Text = "Update";
+                }
+
+
+                nextBtn.Visible = true;
+                prevBtn.Visible = true;
+
+                return true;
+            }
+            frmSub.Dispose();
+            return false;
+        }
+
+        public void FillSearchFilds(int memberID)
+        {
+            try
+            {
+                this.memberID = memberID;
+
+                using (MemberInfo memInfo = new MemberInfo(true))
+                {
+                    memInfo.SelectMember(memberID);
+
+                    SetMemberFields(memInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageView.ExceptionError(ex);
+            }
+        }
+
+        private void SetMemberFields(MemberInfo memInfo)
+        {
+            memberID = memInfo.ID;
+            nameTextBoxX.Text = memInfo.Name;
+            addressTextbox.Text = memInfo.Address;
+            mobileText.Text = memInfo.Mobile;
+            homeTpText.Text = memInfo.HomeTP;
+            emailText.Text = memInfo.Email;
+            indexText.Text = memInfo.regNumber;
+            //indexText.ReadOnly = true;
+            verifiedCheck.CheckState = memInfo.DataVerified == 1 ? CheckState.Checked : CheckState.Unchecked;
+
+            subscriptionTypeCombo.SelectedIndex = ((int)memInfo.subscriptionType - 1);
+            bankCombo.SelectedIndex = ((int)memInfo.bank - 1);
+            paymentTypeCombo.SelectedIndex = ((int)memInfo.paymentType - 1);
+            nameInmagText.Text = memInfo.nameInMag;
+            amountTxt.Value = memInfo.Amount;
+            memInfo.SetAddresses(memberID);
+
+            setAddresses(memInfo.sentAddress);
+        }   
+
+
+        private void setAddresses(List<MemberAddress> list)
+        {
+            adressGrid.Rows.Clear();
+
+            foreach (MemberAddress tg in list)
+            {
+                AddAddressGridRow(tg);
+            }
+        }
+
+        public Image getThumbImageToSave(Image image)
+        {
+            Image.GetThumbnailImageAbort del = new Image.GetThumbnailImageAbort(ThumbCallback);
+            int thumbWidth = 500;
+            int thumbHeight = 500;
+
+            // set thumb images with and height, by considering actual image with and height ratio
+            if (image.Width > image.Height)
+            {
+                thumbWidth = 500;
+                thumbHeight = (int)Math.Round((image.Height / (float)image.Width) * 500);
+            }
+            else
+            {
+                thumbHeight = 500;
+                thumbWidth = (int)Math.Round((image.Width / (float)image.Height) * 500);
+            }
+
+            return image.GetThumbnailImage(thumbWidth, thumbHeight, del, IntPtr.Zero);
+        }
+
+        // use in SetImageData, for delegate
+        private static bool ThumbCallback()
+        {
+            return false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show(GetASCII(emailText.Text));
+
+            //MessageBox.Show(InputLanguage.InstalledInputLanguages[0].LayoutName + "\n" + InputLanguage.CurrentInputLanguage.LayoutName);
+
+            //  InputLanguage.CurrentInputLanguage = InputLanguage.InstalledInputLanguages[0];
+            //InputLanguage.CurrentInputLanguage
+        }
+
+
+        public static string GetASCII(string unicodeString)
+        {
+            if (string.IsNullOrEmpty(unicodeString))
+                return unicodeString;
+
+            // Create two different encodings.
+            Encoding ascii = Encoding.ASCII;
+            Encoding unicode = Encoding.Unicode;
+
+            // Convert the string into a byte[].
+            byte[] unicodeBytes = unicode.GetBytes(unicodeString);
+
+            // Perform the conversion from one encoding to the other.
+            byte[] asciiBytes = Encoding.Convert(unicode, ascii, unicodeBytes);
+
+            // Convert the new byte[] into a char[] and then into a string.
+            // This is a slightly different approach to converting to illustrate
+            // the use of GetCharCount/GetChars.
+            char[] asciiChars = new char[ascii.GetCharCount(asciiBytes, 0, asciiBytes.Length)];
+            ascii.GetChars(asciiBytes, 0, asciiBytes.Length, asciiChars, 0);
+            string asciiString = new string(asciiChars);
+
+            return asciiString.Replace("?", "_");
+        }
+
+
+        int possition = 0;
+
+        //private void emailText_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    possition = emailText.SelectionStart;
+        //    // emailText.SelectionLength = 0;
+
+        //    emailText.Clear();
+        //}
+
+        //private void emailText_KeyUp(object sender, KeyEventArgs e)
+        //{
+
+        //    emailString += Convert.ToChar(e.KeyValue).ToString().ToLower();
+        //    emailText.Clear();
+        //    emailText.Text = emailString;
+        //    emailText.ForeColor = Color.Black;
+        //    emailText.SelectionStart = possition + 1;
+        //    // MessageBox.Show(possition.ToString());
+        //}
+
+        //private void emailText_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    emailText.ForeColor = Color.White;
+        //}
+
+        
+
+        private void Changelanguage()
+        {
+            if (InputLanguage.CurrentInputLanguage.LayoutName == "Google Input Tools")
+            {
+                lan = InputLanguage.CurrentInputLanguage;
+            }
+
+            InputLanguage.CurrentInputLanguage = InputLanguage.InstalledInputLanguages[0];
+
+        }
+
+        private void emailText_Leave(object sender, EventArgs e)
+        {
+
+            SetLanguage();
+        }
+
+        private void SetLanguage()
+        {
+            try
+            {
+                if (lan != null)
+                {
+                    InputLanguage.CurrentInputLanguage = lan;
+                }
+            }
+            catch { }
+        }
+
+        private void prevBtn_Click(object sender, EventArgs e)
+        {
+            if (findListSelectedIndex - 1 > -1 && findIDList.Count > findListSelectedIndex - 1)
+            {
+                FillSearchFilds(findIDList[--findListSelectedIndex]);
+            }
+
+        }
+
+        private void nextBtn_Click(object sender, EventArgs e)
+        {
+
+            if (findListSelectedIndex + 1 > -1 && findIDList.Count > findListSelectedIndex + 1)
+            {
+                FillSearchFilds(findIDList[++findListSelectedIndex]);
+            }
+
+
+        }
+
+        private void verifiedCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            switch (verifiedCheck.CheckState)
+            {
+                case CheckState.Checked:
+                    {
+                        dataverifiedLabel.ForeColor = Color.Green;
+                        break;
+                    }
+
+                case CheckState.Unchecked:
+                    {
+                        dataverifiedLabel.ForeColor = Color.Red;
+                        break;
+                    }
+
+                default:
+                    {
+                        dataverifiedLabel.ForeColor = Color.Black;
+                        break;
+                    }
+            }
+        }
+
+        private void frmMember_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == 13 && e.Control == true)
+            {
+                AddUpdate();
+            }
+            else if (e.KeyValue == 39 && nextBtn.Enabled)
+            {
+                nextBtn_Click(sender, e);
+            }
+            else if (e.KeyValue == 37 && prevBtn.Enabled)
+            {
+                prevBtn_Click(sender, e);
+            }
+        }
+
+       
+
+        private bool checkExisting(int tagID)
+        {
+            if (adressGrid.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow row in adressGrid.Rows)
+                {
+                    //DateTime fromDate = DateTime.Parse(row.Cells[3].Value.ToString());
+                    //DateTime toDate = DateTime.Parse(row.Cells[4].Value.ToString());
+
+                    if ((int)row.Cells[2].Value == tagID)
+                        return false;
+
+                }
+            }
+
+            return true;
+        }
+
+        private void AddAddressGridRow(MemberAddress ad)
+        {
+            DataGridViewRow row = new DataGridViewRow();
+            DataGridViewTextBoxCell cell1 = new DataGridViewTextBoxCell();
+            DataGridViewTextBoxCell cell2 = new DataGridViewTextBoxCell();
+            DataGridViewTextBoxCell cell3 = new DataGridViewTextBoxCell();
+
+            cell1.Value = ad.ID;
+            cell2.Value = ad.Address;
+            cell3.Value = ad.NumOfMag;
+
+
+            //  row.HeaderCell.Value = (otherDatagrid.Rows.Count + 1).ToString();
+            row.Cells.Add(cell2);
+            row.Cells.Add(cell1);
+            row.Cells.Add(cell3);
+
+
+            adressGrid.Rows.Add(row);
+        }
+
+
+        private void tagGrid_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete && adressGrid.CurrentRow.Index > -1)
+            {
+                if (MessageView.ShowQuestionMsg("Delete Current Tag '"+adressGrid.Rows[adressGrid.CurrentRow.Index].Cells[1].Value+"' ?") == System.Windows.Forms.DialogResult.OK)
+                {
+                    int id = (int)adressGrid.Rows[adressGrid.CurrentRow.Index].Cells[1].Value;
+                    using (MemberInfo mem = new MemberInfo(true))
+                    {
+                        mem.RemoveAddress(id);
+                    }
+
+                    adressGrid.Rows.RemoveAt(adressGrid.CurrentRow.Index);
+                }
+            }
+        }
+
+
+        private void addressAddBtn_Click(object sender, EventArgs e)
+        {
+            MemberAddress ad = new MemberAddress(0, sentaAddressTextbox.Text, (int)numOfMagText.Value, (int)numOfMagText.Value);
+            if (memberID != 0)
+            {
+                using (MemberInfo mem = new MemberInfo(true))
+                {
+                    mem.ID = memberID;
+                    mem.AddAddress(ad);
+                   
+                }
+            }
+
+            AddAddressGridRow(ad);
+
+            sentaAddressTextbox.Clear();
+            numOfMagText.Value = 1;
+            sentaAddressTextbox.Select();
+            
+        }
+
+        private void amountTxt_Enter(object sender, EventArgs e)
+        {
+            ((NumericUpDown)sender).Select(0, 5);
+        }
+
+        private void numOfMagText_Enter(object sender, EventArgs e)
+        {
+            ((NumericUpDown)sender).Select(0, 2);
+        }
+
+        private void indexText_KeyUp_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                using (MemberInfo memInfo = new MemberInfo(true))
+                {
+                    if (indexText.Text != nextIndex)
+                    {
+                        memInfo.SelectMemberbyRegNumber(indexText.Text);
+
+                        //if (memInfo.regNumber == indexText.Text)
+                        //{
+                            this.memberID = memInfo.ID;
+                            SetMemberFields(memInfo);
+
+                            if (userLevel == DBCore.UserLevel.SystemAdmin || userLevel == DBCore.UserLevel.SystemUser_IUD)
+                            {
+                                deleteBtn.Enabled = true;
+                                addbtn.Text = "Update";
+                            }
+
+                        //}
+                        //else
+                        //{
+                        //    string tempIndex = indexText.Text;
+                        //    clear();
+                        //    indexText.Text = tempIndex;
+                        //}
+                    }
+                }
+                indexText.SelectionStart = 15;
+
+            }
+        }
+
+        private void paymentTypeCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (paymentTypeCombo.SelectedIndex == 1)
+            {
+                bankCombo.Enabled = true;
+            }
+            else
+            {
+                bankCombo.Enabled = false;
+                bankCombo.SelectedIndex = -1;
+            }
+        }
+
+        private void nameTextBoxX_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(nameInmagText.Text))
+            {
+                nameInmagText.Text = nameTextBoxX.Text;
+            }
+        }
+
+        private void nameInmagText_Enter(object sender, EventArgs e)
+        {
+            nameInmagText.Select(0, 0);
+        }
+
+        private void indexText_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            indexText.ReadOnly = false;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            statusText.Visible = false;
+            timer1.Enabled = false;
+        }
+
+        private void mobileText_Enter(object sender, EventArgs e)
+        {
+            Changelanguage();
+        }
+
+        private void mobileText_Leave(object sender, EventArgs e)
+        {
+            SetLanguage();
+        }
+
+        private void homeTpText_Leave(object sender, EventArgs e)
+        {
+            SetLanguage();
+        }
+
+        private void homeTpText_Enter(object sender, EventArgs e)
+        {
+            Changelanguage();
+        }
+
+
+    }
+}
