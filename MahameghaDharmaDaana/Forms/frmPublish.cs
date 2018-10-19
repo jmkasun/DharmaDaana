@@ -21,6 +21,13 @@ namespace YBS.Forms
         int x = 100;
         int y = 100;
 
+        int nameX = 100;
+        int nameY = 100;
+
+        int schoolCatID = 0;
+        int schoolCatX = 0;
+        int schoolCatY = 0;        
+
 
         DBCore.UserLevel userLevel = DBCore.UserLevel.SystemUser;
 
@@ -110,6 +117,15 @@ namespace YBS.Forms
                     y = Int32.Parse(configAddreslocation[1]);
 
 
+                    string[] confignamelocation = DBCore.Utility.GetAppsetting(DBCore.AppSetting.DonarNameLocation).Split(new char[] { '*' });
+                    nameX = Int32.Parse(confignamelocation[0]);
+                    nameY = Int32.Parse(confignamelocation[1]);
+
+                    string[] configSchoollocation = DBCore.Utility.GetAppsetting(DBCore.AppSetting.SchoolCatLocation).Split(new char[] { '*' });
+                    schoolCatID = Int32.Parse(configSchoollocation[0]);
+                    schoolCatX = Int32.Parse(configSchoollocation[1]);
+                    schoolCatY = Int32.Parse(configSchoollocation[2]);
+
                 }
                 catch { }
             }
@@ -126,13 +142,29 @@ namespace YBS.Forms
 
                         string address = adressGrid.Rows[rowIndex].Cells[2].Value.ToString();
                         string memberID = adressGrid.Rows[rowIndex].Cells[4].Value.ToString();
+                        string donarName= adressGrid.Rows[rowIndex].Cells[5].Value.ToString();
 
                         int rowPrintCount = (int)adressGrid.Rows[rowIndex].Cells[3].Value;
 
-                        TextRenderer.DrawText(e.Graphics, "ID: " + memberID, new Font(fontName, 40, FontStyle.Regular), new Rectangle(4500, 150, 800, 200), SystemColors.ControlText, TextFormatFlags.Left);
+                        TextRenderer.DrawText(e.Graphics, "ID: " + memberID, new Font(fontName, 40, FontStyle.Regular), new Rectangle(4600, 6350, 800, 200), SystemColors.ControlText, TextFormatFlags.Left);
                         TextRenderer.DrawText(e.Graphics, "යා යුතු:", new Font(fontName, (fontSize - 1) * 6, FontStyle.Regular), new Rectangle(x - 380, y - 100, 400, 200), SystemColors.ControlText, TextFormatFlags.Left);
                         TextRenderer.DrawText(e.Graphics, address, new Font(fontName, fontSize * 6, FontStyle.Regular), new Rectangle(x, y, 3000, 1000), SystemColors.ControlText, TextFormatFlags.Left);
+                        TextRenderer.DrawText(e.Graphics, "ධර්ම දාන දායකත්වය " + donarName + " විසිනි", new Font(fontName, fontSize * 5, FontStyle.Regular), new Rectangle(nameX, nameY, 3000, 1000), SystemColors.ControlText, TextFormatFlags.Left);
+
+                        if (categoryCombo.SelectedIndex == schoolCatID)
+                        {
+                            TextRenderer.DrawText(e.Graphics, "^.=re uKav,hg iy mqia:ld,h i|yd&&", new Font("FMEmanee", fontSize * 5, FontStyle.Regular), new Rectangle(schoolCatX, schoolCatY, 2500, 100), SystemColors.ControlText, TextFormatFlags.Left);
+                        }
+
+                        try
+                        {
+                            e.Graphics.DrawImage(Image.FromFile("logo.jpg"), nameX - 100, nameY);
+                        }
+                        catch { }
+
+
                         addPrintHistory((int)adressGrid.Rows[rowIndex].Cells[1].Value, privateAddressRadio.Checked ? 0 : 1, 1, DateTime.Now);
+
 
                         if (rowPrintCount <= printCount)
                         {

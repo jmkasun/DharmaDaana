@@ -7,7 +7,7 @@ using System.Configuration;
 namespace DBCore
 {
 
-    public enum AppSetting { BgImage, SinhalaFontName, AddressPrintLocation, fontSize }
+    public enum AppSetting { BgImage, SinhalaFontName, AddressPrintLocation, fontSize , DonarNameLocation, SchoolCatLocation}
     public enum UserLevel { SystemUser = 0, SystemUser_I = 1, SystemUser_IUD = 2, SystemAdmin = 3 };
     public enum Banks { BOC = 1, Sampath = 2, HNB = 3 }
     public enum PaymentType { Asapuwa = 1, Bank = 2 }

@@ -28,12 +28,6 @@ E:\Projects\Personal\Amawathura\MahameghaDharmaDaana\MahameghaDharmaDaana\bin\De
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\YBS.exe.config
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.exe
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.pdb
-D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\YBS.exe
-D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\YBS.pdb
-D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\DBCore.dll
-D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
-D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
-D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\DBCore.pdb
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\MahameghaDharmaDaana.csprojResolveAssemblyReference.cache
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Admin.frmLoginWindow.resources
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Common.frmSearch.resources
@@ -48,6 +42,12 @@ D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Forms.frmUs
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.MDIParent1.resources
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Properties.Resources.resources
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\MahameghaDharmaDaana.csproj.GenerateResource.Cache
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\YBS.exe
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\YBS.pdb
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\DBCore.dll
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\MySql.Data.dll
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\Google.Protobuf.dll
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\DBCore.pdb
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\MySql.Data.xml

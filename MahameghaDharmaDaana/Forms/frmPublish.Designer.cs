@@ -52,10 +52,11 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.regNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.regNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameinMag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelEx1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.adressGrid)).BeginInit();
@@ -87,7 +88,7 @@
             // 
             this.printButton.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.printButton.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.printButton.Location = new System.Drawing.Point(759, 526);
+            this.printButton.Location = new System.Drawing.Point(759, 524);
             this.printButton.Name = "printButton";
             this.printButton.Size = new System.Drawing.Size(83, 29);
             this.printButton.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -235,10 +236,11 @@
             this.adressGrid.ColumnHeadersHeight = 30;
             this.adressGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewCheckBoxColumn1,
+            this.regNumber,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
-            this.regNumber});
+            this.NameinMag});
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -252,7 +254,7 @@
             this.adressGrid.RowHeadersWidth = 60;
             this.adressGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.adressGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.adressGrid.Size = new System.Drawing.Size(824, 459);
+            this.adressGrid.Size = new System.Drawing.Size(824, 452);
             this.adressGrid.TabIndex = 110;
             this.adressGrid.TabStop = false;
             this.adressGrid.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.adressGrid_CellMouseClick);
@@ -309,7 +311,13 @@
             this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewCheckBoxColumn1.HeaderText = "Select All";
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.Width = 80;
+            this.dataGridViewCheckBoxColumn1.Width = 90;
+            // 
+            // regNumber
+            // 
+            this.regNumber.DataPropertyName = "regNumber";
+            this.regNumber.HeaderText = "අංකය";
+            this.regNumber.Name = "regNumber";
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -327,7 +335,7 @@
             this.dataGridViewTextBoxColumn2.HeaderText = "ලිපිනය";
             this.dataGridViewTextBoxColumn2.MinimumWidth = 490;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 540;
+            this.dataGridViewTextBoxColumn2.Width = 490;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -339,12 +347,12 @@
             this.dataGridViewTextBoxColumn3.MinimumWidth = 100;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
-            // regNumber
+            // NameinMag
             // 
-            this.regNumber.DataPropertyName = "regNumber";
-            this.regNumber.HeaderText = "regNumber";
-            this.regNumber.Name = "regNumber";
-            this.regNumber.Visible = false;
+            this.NameinMag.DataPropertyName = "nameInMag";
+            this.NameinMag.HeaderText = "NameinMag";
+            this.NameinMag.Name = "NameinMag";
+            this.NameinMag.Visible = false;
             // 
             // frmPublish
             // 
@@ -387,9 +395,10 @@
         private System.Windows.Forms.ComboBox categoryCombo;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn regNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn regNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameinMag;
     }
 }

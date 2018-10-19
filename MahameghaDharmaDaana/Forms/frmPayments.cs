@@ -16,6 +16,7 @@ namespace YBS.Forms
     {
         int paymentID = 0;
         int memberID = 0;
+        int monthlyAmount = 0;
 
         DBCore.UserLevel userLevel = DBCore.UserLevel.SystemUser;
 
@@ -31,45 +32,53 @@ namespace YBS.Forms
             {
                 if (ValidateBeforeAdd())
                 {
-                    using (MonthlyPayment pay = new MonthlyPayment(true))
+                    int numberofMonths = (int)amountText.Value / monthlyAmount;
+                    for (int i = 0; i < numberofMonths; i++)
                     {
-
-                        setObjectFromFieldValues(pay);
-
-                        if (paymentID == 0)
+                        using (MonthlyPayment pay = new MonthlyPayment(true))
                         {
-                            if (pay.Add() == 1)
+
+
+
+
+                            setObjectFromFieldValues(pay, i);
+
+                            if (paymentID == 0)
                             {
-                                // MessageView.ShowMsg("Sucessfully Added");
-
-                                //errorProvider1.SetError(idTxt, string.Empty);
-                                //errorProvider1.SetError(nameTxt, string.Empty);
-                                statusText.Visible = true;
-                                timer1.Enabled = true;
-
-                                clear();
-                            }
-
-                        }
-                        else
-                        {
-                            pay.ID = paymentID;
-
-                            if (MessageView.ShowQuestionMsg("Update Address") == DialogResult.OK)
-                            {
-
-                                if (pay.Update() == 1)
+                                if (pay.Add() == 1)
                                 {
-                                    MessageView.ShowMsg("Sucessfully Updated");
+                                    // MessageView.ShowMsg("Sucessfully Added");
 
                                     //errorProvider1.SetError(idTxt, string.Empty);
                                     //errorProvider1.SetError(nameTxt, string.Empty);
+                                    statusText.Visible = true;
+                                    timer1.Enabled = true;
 
-                                    clear();
+                                    
+                                }
+
+                            }
+                            else
+                            {
+                                pay.ID = paymentID;
+
+                                if (MessageView.ShowQuestionMsg("Update Address") == DialogResult.OK)
+                                {
+
+                                    if (pay.Update() == 1)
+                                    {
+                                        MessageView.ShowMsg("Sucessfully Updated");
+
+                                        //errorProvider1.SetError(idTxt, string.Empty);
+                                        //errorProvider1.SetError(nameTxt, string.Empty);
+
+                                    }
                                 }
                             }
                         }
                     }
+
+                    clear();
                 }
 
             }
@@ -79,11 +88,14 @@ namespace YBS.Forms
             }
         }
 
-        private void setObjectFromFieldValues(MonthlyPayment pay)
+        private void setObjectFromFieldValues(MonthlyPayment pay, int monthNumber)
         {
+            int month = 1 + (monthCombo.SelectedIndex + monthNumber) % 12;
+            int year = Int32.Parse(yearText.Text) + ((monthCombo.SelectedIndex + monthNumber) / 12);
+
             pay.MemberID = memberID;
-            pay.Month = new DateTime(Int32.Parse(yearText.Text), monthCombo.SelectedIndex + 1, 1);
-            pay.Amount = (int)amountText.Value;
+            pay.Month = new DateTime(year, month, 1);
+            pay.Amount = monthlyAmount;
         }
 
 
@@ -109,6 +121,7 @@ namespace YBS.Forms
             mobileText.Clear();
             homeTpText.Clear();
             initialAmountTxt.Text = "";
+            monthslbl.Text = "";
 
             dataGridView1.Rows.Clear();
 
@@ -240,20 +253,25 @@ namespace YBS.Forms
             
             if (e.KeyCode == Keys.Enter)
             {
-                using (MemberInfo memInfo = new MemberInfo(true))
-                {
-                    if (!string.IsNullOrEmpty(regNumText.Text))
-                    {
-                        memInfo.SelectMemberbyRegNumber(regNumText.Text);
+                selectMember();
+            } 
+        }
 
-                        if (memInfo.ID > 0)
-                        {
-                            findMember(memInfo);
-                           
-                        }
+        private void selectMember()
+        {
+            using (MemberInfo memInfo = new MemberInfo(true))
+            {
+                if (!string.IsNullOrEmpty(regNumText.Text))
+                {
+                    memInfo.SelectMemberbyRegNumber(regNumText.Text);
+
+                    if (memInfo.ID > 0)
+                    {
+                        findMember(memInfo);
+
                     }
                 }
-            } 
+            }
         }
 
         private void SetHistryGrid(List<PaymentHistry> list)
@@ -284,7 +302,7 @@ namespace YBS.Forms
             mobileText.Text = memInfo.Mobile;
             homeTpText.Text = memInfo.HomeTP;
             initialAmountTxt.Text = memInfo.Amount.ToString();
-
+            monthlyAmount = memInfo.Amount;
             amountText.Value = memInfo.Amount;
 
             if (string.IsNullOrEmpty(yearText.Text))
@@ -310,6 +328,36 @@ namespace YBS.Forms
             {
                 findButton_Click(sender, e);
             }
+        }
+
+        private void amountText_Leave(object sender, EventArgs e)
+        {
+            calculateMonths();
+        }
+
+        private void calculateMonths()
+        {
+            if (monthlyAmount > 0)
+            {
+                int numberofMonths = (int)amountText.Value / monthlyAmount;
+                monthslbl.Text = "";
+
+
+                for (int i = 0; i < numberofMonths; i++)
+                {
+                    monthslbl.Text += monthCombo.Items[(monthCombo.SelectedIndex + i) % 12] + "\n";
+                }
+            }
+        }
+
+        private void monthCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            calculateMonths();
+        }
+
+        private void regNumText_Leave(object sender, EventArgs e)
+        {
+            selectMember();
         }
     }
 }
