@@ -1,0 +1,8 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `otherAddress_SelMonth`(p_month DATE,p_category int)
+BEGIN
+    
+    SELECT  false checked, id, Address,numOfMag,0 AS regNumber,'' AS nameInMag
+    FROM otheraddress
+    WHERE id > 0 and (categoryid = p_category OR p_category = -1);
+
+END
