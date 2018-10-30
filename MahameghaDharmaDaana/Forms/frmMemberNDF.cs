@@ -267,8 +267,15 @@ namespace YBS.Forms
         {
             try
             {
-                Font sinhalaFont = new System.Drawing.Font(DBCore.Utility.GetAppsetting(DBCore.AppSetting.SinhalaFontName), 12);
-                nameTextBoxX.Font = addressTextbox.Font = nameInmagText.Font = sentaAddressTextbox.Font = sinhalaFont;
+                string fontName = DBCore.Utility.GetAppsetting(DBCore.AppSetting.SinhalaFontName);
+
+                if (!string.IsNullOrEmpty(fontName))
+                {
+                    Font sinhalaFont = new System.Drawing.Font(fontName, 12);
+
+              
+                    nameTextBoxX.Font = addressTextbox.Font = nameInmagText.Font = sentaAddressTextbox.Font = sinhalaFont;
+                }
             }
             catch { }
 
