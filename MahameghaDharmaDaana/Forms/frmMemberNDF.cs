@@ -27,7 +27,7 @@ namespace YBS.Forms
         List<int> findIDList = new List<int>();
         int findListSelectedIndex = -1;
         DBCore.UserLevel userLevel = DBCore.UserLevel.SystemUser;
-
+        int magazinePrice = 0;
 
         public frmMemberNDF(int permissionLevel)
         {
@@ -119,7 +119,7 @@ namespace YBS.Forms
             {
                 foreach (DataGridViewRow row in adressGrid.Rows)
                 {
-                    memInfo.sentAddress.Add(new MemberAddress((int)row.Cells[1].Value, row.Cells[0].Value.ToString(), 0, (int)row.Cells[2].Value,categoryCombo.SelectedIndex));
+                    memInfo.sentAddress.Add(new MemberAddress((int)row.Cells[1].Value, row.Cells[0].Value.ToString(), 0, (int)row.Cells[2].Value, categoryCombo.SelectedIndex));
                 }
             }
         }
@@ -152,7 +152,7 @@ namespace YBS.Forms
             mobileText.Clear();
             emailString = string.Empty;
             indexText.ReadOnly = false;
-            
+
             nextBtn.Visible = false;
             prevBtn.Visible = false;
             findIDList.Clear();
@@ -184,15 +184,7 @@ namespace YBS.Forms
             }
             else
             {
-                //if ((nicIndexValidator == 4 || nicIndexValidator == 3))
-                //{
-                //    errorProvider1.SetError(indexText, "Duplicate Index number");
-                //    retVal = false;
-                //}
-                //else
-                //{
-                //    errorProvider1.SetError(indexText, string.Empty);
-                //}
+
             }
 
             nameTextBoxX.Text = nameTextBoxX.Text.Replace("\n", "").Replace("\r", "");
@@ -276,11 +268,7 @@ namespace YBS.Forms
             try
             {
                 Font sinhalaFont = new System.Drawing.Font(DBCore.Utility.GetAppsetting(DBCore.AppSetting.SinhalaFontName), 12);
-
-               nameTextBoxX.Font = addressTextbox.Font = nameInmagText.Font = sentaAddressTextbox.Font = sinhalaFont;
-
-
-
+                nameTextBoxX.Font = addressTextbox.Font = nameInmagText.Font = sentaAddressTextbox.Font = sinhalaFont;
             }
             catch { }
 
@@ -290,11 +278,10 @@ namespace YBS.Forms
                 categoryCombo.SelectedIndex = -1;
             }
 
-
-
             SetIndexField();
             indexText.SelectionStart = 15;
 
+            Int32.TryParse(DBCore.Utility.GetAppsetting(DBCore.AppSetting.MagazinePrice), out magazinePrice);
 
             setUserPermissions();
         }
@@ -374,7 +361,7 @@ namespace YBS.Forms
                     }
 
                     DataTable ds = memInfo.SelectFind();
-                    frmSearch frmSub = new frmSearch(ds, this.Text, 4,60);
+                    frmSearch frmSub = new frmSearch(ds, this.Text, 4, 60);
 
                     frmSub.Width = this.Width - 100;
 
@@ -471,7 +458,7 @@ namespace YBS.Forms
             memInfo.SetAddresses(memberID);
 
             setAddresses(memInfo.sentAddress);
-        }   
+        }
 
 
         private void setAddresses(List<MemberAddress> list)
@@ -574,7 +561,7 @@ namespace YBS.Forms
         //    emailText.ForeColor = Color.White;
         //}
 
-        
+
 
         private void Changelanguage()
         {
@@ -665,7 +652,7 @@ namespace YBS.Forms
             }
         }
 
-       
+
 
         private bool checkExisting(int tagID)
         {
@@ -711,7 +698,7 @@ namespace YBS.Forms
         {
             if (e.KeyCode == Keys.Delete && adressGrid.CurrentRow.Index > -1)
             {
-                if (MessageView.ShowQuestionMsg("Delete Current Tag '"+adressGrid.Rows[adressGrid.CurrentRow.Index].Cells[1].Value+"' ?") == System.Windows.Forms.DialogResult.OK)
+                if (MessageView.ShowQuestionMsg("Delete Current Tag '" + adressGrid.Rows[adressGrid.CurrentRow.Index].Cells[1].Value + "' ?") == System.Windows.Forms.DialogResult.OK)
                 {
                     int id = (int)adressGrid.Rows[adressGrid.CurrentRow.Index].Cells[1].Value;
                     using (MemberInfo mem = new MemberInfo(true))
@@ -729,7 +716,7 @@ namespace YBS.Forms
         {
             if (sentaAddressTextbox.Text.Length < 1)
                 return;
-            MemberAddress ad = new MemberAddress(0, sentaAddressTextbox.Text, (int)numOfMagText.Value, (int)numOfMagText.Value,categoryCombo.SelectedIndex);
+            MemberAddress ad = new MemberAddress(0, sentaAddressTextbox.Text, (int)numOfMagText.Value, (int)numOfMagText.Value, categoryCombo.SelectedIndex);
 
             if (memberID != 0)
             {
@@ -737,7 +724,7 @@ namespace YBS.Forms
                 {
                     mem.ID = memberID;
                     mem.AddAddress(ad);
-                   
+
                 }
             }
 
@@ -746,7 +733,7 @@ namespace YBS.Forms
             sentaAddressTextbox.Clear();
             numOfMagText.Value = 1;
             sentaAddressTextbox.Select();
-            
+
         }
 
         private void amountTxt_Enter(object sender, EventArgs e)
@@ -771,14 +758,14 @@ namespace YBS.Forms
 
                         //if (memInfo.regNumber == indexText.Text)
                         //{
-                            this.memberID = memInfo.ID;
-                            SetMemberFields(memInfo);
+                        this.memberID = memInfo.ID;
+                        SetMemberFields(memInfo);
 
-                            if (userLevel == DBCore.UserLevel.SystemAdmin || userLevel == DBCore.UserLevel.SystemUser_IUD)
-                            {
-                                deleteBtn.Enabled = true;
-                                addbtn.Text = "Update";
-                            }
+                        if (userLevel == DBCore.UserLevel.SystemAdmin || userLevel == DBCore.UserLevel.SystemUser_IUD)
+                        {
+                            deleteBtn.Enabled = true;
+                            addbtn.Text = "Update";
+                        }
 
                         //}
                         //else
@@ -849,8 +836,6 @@ namespace YBS.Forms
         private void homeTpText_Enter(object sender, EventArgs e)
         {
             Changelanguage();
-        }
-
-
+        }       
     }
 }

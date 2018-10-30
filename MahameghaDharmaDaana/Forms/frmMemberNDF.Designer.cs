@@ -34,9 +34,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMemberNDF));
             this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.numOfMag = new System.Windows.Forms.NumericUpDown();
             this.bankCombo = new System.Windows.Forms.ComboBox();
             this.paymentTypeCombo = new System.Windows.Forms.ComboBox();
             this.subscriptionTypeCombo = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.addressTextbox = new System.Windows.Forms.TextBox();
             this.nameInmagText = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -52,6 +54,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.categoryCombo = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.sentaAddressTextbox = new System.Windows.Forms.TextBox();
@@ -79,9 +83,8 @@
             this.prevBtn = new DevComponents.DotNetBar.ButtonX();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.categoryCombo = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.groupPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numOfMag)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.adressGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOfMagText)).BeginInit();
@@ -99,9 +102,11 @@
             this.groupPanel1.AutoScroll = true;
             this.groupPanel1.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanel1.Controls.Add(this.numOfMag);
             this.groupPanel1.Controls.Add(this.bankCombo);
             this.groupPanel1.Controls.Add(this.paymentTypeCombo);
             this.groupPanel1.Controls.Add(this.subscriptionTypeCombo);
+            this.groupPanel1.Controls.Add(this.label15);
             this.groupPanel1.Controls.Add(this.addressTextbox);
             this.groupPanel1.Controls.Add(this.nameInmagText);
             this.groupPanel1.Controls.Add(this.label13);
@@ -155,6 +160,20 @@
             this.groupPanel1.StyleMouseOver.Class = "";
             this.groupPanel1.TabIndex = 0;
             // 
+            // numOfMag
+            // 
+            this.numOfMag.Font = new System.Drawing.Font("Arial", 12F);
+            this.numOfMag.Location = new System.Drawing.Point(320, 309);
+            this.numOfMag.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numOfMag.Name = "numOfMag";
+            this.numOfMag.Size = new System.Drawing.Size(63, 26);
+            this.numOfMag.TabIndex = 7;
+            this.numOfMag.Enter += new System.EventHandler(this.numOfMagText_Enter);
+            // 
             // bankCombo
             // 
             this.bankCombo.Enabled = false;
@@ -193,6 +212,15 @@
             this.subscriptionTypeCombo.Name = "subscriptionTypeCombo";
             this.subscriptionTypeCombo.Size = new System.Drawing.Size(172, 26);
             this.subscriptionTypeCombo.TabIndex = 7;
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(223, 312);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(106, 18);
+            this.label15.TabIndex = 94;
+            this.label15.Text = "සඟරා ප්‍රමාණය";
             // 
             // addressTextbox
             // 
@@ -264,7 +292,7 @@
             this.emailText.Font = new System.Drawing.Font("Arial", 12F);
             this.emailText.Location = new System.Drawing.Point(145, 277);
             this.emailText.Name = "emailText";
-            this.emailText.Size = new System.Drawing.Size(226, 26);
+            this.emailText.Size = new System.Drawing.Size(238, 26);
             this.emailText.TabIndex = 5;
             this.emailText.Leave += new System.EventHandler(this.emailText_Leave);
             // 
@@ -343,6 +371,27 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "මහාමේඝ සඟරා යැවිය යුතු ලිපිනයන්";
             // 
+            // categoryCombo
+            // 
+            this.categoryCombo.Font = new System.Drawing.Font("Arial", 12F);
+            this.categoryCombo.FormattingEnabled = true;
+            this.categoryCombo.Items.AddRange(new object[] {
+            "මාසික",
+            "වාර්ෂික"});
+            this.categoryCombo.Location = new System.Drawing.Point(154, 171);
+            this.categoryCombo.Name = "categoryCombo";
+            this.categoryCombo.Size = new System.Drawing.Size(172, 26);
+            this.categoryCombo.TabIndex = 104;
+            // 
+            // label14
+            // 
+            this.label14.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(7, 174);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(106, 18);
+            this.label14.TabIndex = 103;
+            this.label14.Text = "වර්ගය";
+            // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -355,7 +404,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(5, 167);
+            this.label1.Location = new System.Drawing.Point(5, 145);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(118, 18);
             this.label1.TabIndex = 94;
@@ -367,7 +416,7 @@
             this.sentaAddressTextbox.Location = new System.Drawing.Point(154, 15);
             this.sentaAddressTextbox.Multiline = true;
             this.sentaAddressTextbox.Name = "sentaAddressTextbox";
-            this.sentaAddressTextbox.Size = new System.Drawing.Size(334, 143);
+            this.sentaAddressTextbox.Size = new System.Drawing.Size(334, 122);
             this.sentaAddressTextbox.TabIndex = 1;
             // 
             // adressGrid
@@ -379,9 +428,9 @@
             this.address,
             this.ID,
             this.number});
-            this.adressGrid.Location = new System.Drawing.Point(6, 221);
+            this.adressGrid.Location = new System.Drawing.Point(6, 203);
             this.adressGrid.Name = "adressGrid";
-            this.adressGrid.Size = new System.Drawing.Size(482, 153);
+            this.adressGrid.Size = new System.Drawing.Size(482, 171);
             this.adressGrid.TabIndex = 93;
             this.adressGrid.TabStop = false;
             this.adressGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tagGrid_KeyUp);
@@ -413,7 +462,7 @@
             // numOfMagText
             // 
             this.numOfMagText.Font = new System.Drawing.Font("Arial", 12F);
-            this.numOfMagText.Location = new System.Drawing.Point(154, 164);
+            this.numOfMagText.Location = new System.Drawing.Point(154, 142);
             this.numOfMagText.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -434,7 +483,7 @@
             this.addressAddBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.addressAddBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.addressAddBtn.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addressAddBtn.Location = new System.Drawing.Point(405, 166);
+            this.addressAddBtn.Location = new System.Drawing.Point(405, 144);
             this.addressAddBtn.Name = "addressAddBtn";
             this.addressAddBtn.Size = new System.Drawing.Size(82, 28);
             this.addressAddBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -457,7 +506,7 @@
             0,
             0});
             this.amountTxt.Name = "amountTxt";
-            this.amountTxt.Size = new System.Drawing.Size(172, 26);
+            this.amountTxt.Size = new System.Drawing.Size(72, 26);
             this.amountTxt.TabIndex = 6;
             this.amountTxt.Enter += new System.EventHandler(this.amountTxt_Enter);
             // 
@@ -467,9 +516,9 @@
             this.groupBox1.Controls.Add(this.mobileText);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Location = new System.Drawing.Point(3, 193);
+            this.groupBox1.Location = new System.Drawing.Point(3, 198);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(379, 78);
+            this.groupBox1.Size = new System.Drawing.Size(400, 73);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "දුරකථන අංක";
@@ -477,24 +526,24 @@
             // homeTpText
             // 
             this.homeTpText.Font = new System.Drawing.Font("Arial", 12F);
-            this.homeTpText.Location = new System.Drawing.Point(142, 46);
+            this.homeTpText.Location = new System.Drawing.Point(142, 44);
             this.homeTpText.Name = "homeTpText";
-            this.homeTpText.Size = new System.Drawing.Size(226, 26);
+            this.homeTpText.Size = new System.Drawing.Size(238, 26);
             this.homeTpText.TabIndex = 2;
             // 
             // mobileText
             // 
             this.mobileText.Font = new System.Drawing.Font("Arial", 12F);
-            this.mobileText.Location = new System.Drawing.Point(142, 14);
+            this.mobileText.Location = new System.Drawing.Point(142, 12);
             this.mobileText.Name = "mobileText";
-            this.mobileText.Size = new System.Drawing.Size(226, 26);
+            this.mobileText.Size = new System.Drawing.Size(238, 26);
             this.mobileText.TabIndex = 1;
             this.mobileText.Enter += new System.EventHandler(this.mobileText_Enter);
             // 
             // label9
             // 
             this.label9.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(6, 16);
+            this.label9.Location = new System.Drawing.Point(6, 14);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(61, 18);
             this.label9.TabIndex = 94;
@@ -503,7 +552,7 @@
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(6, 48);
+            this.label8.Location = new System.Drawing.Point(6, 46);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(67, 18);
             this.label8.TabIndex = 94;
@@ -519,7 +568,7 @@
             this.dataverifiedLabel.BackgroundStyle.Class = "";
             this.dataverifiedLabel.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataverifiedLabel.ForeColor = System.Drawing.Color.Red;
-            this.dataverifiedLabel.Location = new System.Drawing.Point(320, 416);
+            this.dataverifiedLabel.Location = new System.Drawing.Point(323, 416);
             this.dataverifiedLabel.Name = "dataverifiedLabel";
             this.dataverifiedLabel.Size = new System.Drawing.Size(83, 21);
             this.dataverifiedLabel.TabIndex = 82;
@@ -676,27 +725,6 @@
             this.timer1.Interval = 2000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // categoryCombo
-            // 
-            this.categoryCombo.Font = new System.Drawing.Font("Arial", 12F);
-            this.categoryCombo.FormattingEnabled = true;
-            this.categoryCombo.Items.AddRange(new object[] {
-            "මාසික",
-            "වාර්ෂික"});
-            this.categoryCombo.Location = new System.Drawing.Point(154, 193);
-            this.categoryCombo.Name = "categoryCombo";
-            this.categoryCombo.Size = new System.Drawing.Size(172, 26);
-            this.categoryCombo.TabIndex = 104;
-            // 
-            // label14
-            // 
-            this.label14.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(7, 196);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(106, 18);
-            this.label14.TabIndex = 103;
-            this.label14.Text = "වර්ගය";
-            // 
             // frmMemberNDF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -712,6 +740,7 @@
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmMember_KeyUp);
             this.groupPanel1.ResumeLayout(false);
             this.groupPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numOfMag)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.adressGrid)).EndInit();
@@ -776,6 +805,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn number;
         private System.Windows.Forms.ComboBox categoryCombo;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.NumericUpDown numOfMag;
+        private System.Windows.Forms.Label label15;
     }
 }
 
