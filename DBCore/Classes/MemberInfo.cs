@@ -23,6 +23,7 @@ namespace DBCore.Classes
         public SubscriptionType subscriptionType;
         public int DataVerified;
         public List<MemberAddress> sentAddress;
+        public int numOfMagazine;
 
         #region IDBFunctions Members
 
@@ -92,6 +93,7 @@ namespace DBCore.Classes
             AddParameter("@P_bank", bank);
             AddParameter("@P_subscriptionType", subscriptionType);
             AddParameter("@P_nameInMag", nameInMag);
+            AddParameter("@P_numOfMagazine", numOfMagazine);
 
             AddParameter("@p_ID", ID);
 
@@ -145,6 +147,7 @@ namespace DBCore.Classes
                     bank = (Banks)reader.GetInt32(8);
                     subscriptionType = (SubscriptionType) reader.GetInt32(9);
                     nameInMag = reader.GetString(10);
+                    numOfMagazine = reader.GetInt32(11);
                 } 
             }
 
@@ -174,8 +177,9 @@ namespace DBCore.Classes
                     paymentType = (PaymentType)reader.GetInt32(7);
                     bank = (Banks)reader.GetInt32(8);
                     subscriptionType = (SubscriptionType)reader.GetInt32(9);
-                    nameInMag = reader.GetString(10);
+                    nameInMag = reader.GetString(10);                    
                     ID = reader.GetInt32(11);
+                    numOfMagazine = reader.GetInt32(12);
                 } 
             }
 
