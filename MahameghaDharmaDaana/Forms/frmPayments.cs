@@ -38,8 +38,7 @@ namespace YBS.Forms
                         using (MonthlyPayment pay = new MonthlyPayment(true))
                         {
 
-
-
+                            
 
                             setObjectFromFieldValues(pay, i);
 
@@ -96,6 +95,7 @@ namespace YBS.Forms
             pay.MemberID = memberID;
             pay.Month = new DateTime(year, month, 1);
             pay.Amount = monthlyAmount;
+            pay.ExtraAmount = (int)extraAmountText.Value;
         }
 
 

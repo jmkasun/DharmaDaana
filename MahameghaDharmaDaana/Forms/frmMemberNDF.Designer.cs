@@ -433,6 +433,7 @@
             this.adressGrid.Size = new System.Drawing.Size(482, 171);
             this.adressGrid.TabIndex = 93;
             this.adressGrid.TabStop = false;
+            this.adressGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.adressGrid_CellMouseDoubleClick);
             this.adressGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tagGrid_KeyUp);
             // 
             // address

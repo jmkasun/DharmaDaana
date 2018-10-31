@@ -38,7 +38,9 @@
             this.cancelbtn = new DevComponents.DotNetBar.ButtonX();
             this.addbtn = new DevComponents.DotNetBar.ButtonX();
             this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.monthslbl = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.findButton = new DevComponents.DotNetBar.ButtonX();
             this.initialAmountTxt = new System.Windows.Forms.Label();
@@ -62,15 +64,16 @@
             this.amountText = new System.Windows.Forms.NumericUpDown();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
-            this.label6 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.extraAmountText = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
             this.panelEx1.SuspendLayout();
             this.groupPanel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.amountText)).BeginInit();
-            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.extraAmountText)).BeginInit();
             this.SuspendLayout();
             // 
             // panelEx1
@@ -154,11 +157,13 @@
             this.groupPanel1.Controls.Add(this.label6);
             this.groupPanel1.Controls.Add(this.groupBox1);
             this.groupPanel1.Controls.Add(this.panel1);
+            this.groupPanel1.Controls.Add(this.label8);
             this.groupPanel1.Controls.Add(this.label7);
             this.groupPanel1.Controls.Add(this.monthCombo);
             this.groupPanel1.Controls.Add(this.yearText);
             this.groupPanel1.Controls.Add(this.label3);
             this.groupPanel1.Controls.Add(this.label1);
+            this.groupPanel1.Controls.Add(this.extraAmountText);
             this.groupPanel1.Controls.Add(this.amountText);
             this.groupPanel1.Location = new System.Drawing.Point(7, 30);
             this.groupPanel1.Name = "groupPanel1";
@@ -194,6 +199,15 @@
             this.groupPanel1.StyleMouseOver.Class = "";
             this.groupPanel1.TabIndex = 1;
             // 
+            // panel2
+            // 
+            this.panel2.AutoScroll = true;
+            this.panel2.Controls.Add(this.monthslbl);
+            this.panel2.Location = new System.Drawing.Point(312, 200);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(166, 148);
+            this.panel2.TabIndex = 106;
+            // 
             // monthslbl
             // 
             this.monthslbl.AutoSize = true;
@@ -203,6 +217,16 @@
             this.monthslbl.Size = new System.Drawing.Size(0, 20);
             this.monthslbl.TabIndex = 105;
             this.monthslbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label6
+            // 
+            this.label6.Font = new System.Drawing.Font("UN-Emanee", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(309, 178);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(150, 16);
+            this.label6.TabIndex = 105;
+            this.label6.Text = "ගෙවීම් සිදුකරන මාස ";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // groupBox1
             // 
@@ -218,7 +242,7 @@
             this.groupBox1.Controls.Add(this.nameText);
             this.groupBox1.Location = new System.Drawing.Point(12, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(534, 169);
+            this.groupBox1.Size = new System.Drawing.Size(534, 163);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "සාමාජික විස්තර";
@@ -385,7 +409,7 @@
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(17, 245);
+            this.label7.Location = new System.Drawing.Point(30, 224);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(108, 18);
             this.label7.TabIndex = 103;
@@ -409,7 +433,7 @@
             "ඔක්තෝම්බර්",
             "නොවැම්බර්",
             "දෙසැම්බර්"});
-            this.monthCombo.Location = new System.Drawing.Point(131, 291);
+            this.monthCombo.Location = new System.Drawing.Point(153, 268);
             this.monthCombo.Name = "monthCombo";
             this.monthCombo.Size = new System.Drawing.Size(143, 26);
             this.monthCombo.TabIndex = 3;
@@ -418,7 +442,7 @@
             // yearText
             // 
             this.yearText.Font = new System.Drawing.Font("Arial", 12F);
-            this.yearText.Location = new System.Drawing.Point(131, 201);
+            this.yearText.Location = new System.Drawing.Point(153, 181);
             this.yearText.Name = "yearText";
             this.yearText.ReadOnly = true;
             this.yearText.Size = new System.Drawing.Size(87, 26);
@@ -429,7 +453,7 @@
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 290);
+            this.label3.Location = new System.Drawing.Point(15, 267);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(123, 18);
             this.label3.TabIndex = 98;
@@ -439,7 +463,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(63, 202);
+            this.label1.Location = new System.Drawing.Point(76, 182);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 18);
             this.label1.TabIndex = 98;
@@ -454,7 +478,7 @@
             0,
             0,
             0});
-            this.amountText.Location = new System.Drawing.Point(131, 245);
+            this.amountText.Location = new System.Drawing.Point(153, 224);
             this.amountText.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -481,24 +505,39 @@
             this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
             this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
             // 
-            // label6
+            // extraAmountText
             // 
-            this.label6.Font = new System.Drawing.Font("UN-Emanee", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(309, 179);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(150, 16);
-            this.label6.TabIndex = 105;
-            this.label6.Text = "ගෙවීම් සිදුකරන මාස ";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.extraAmountText.Font = new System.Drawing.Font("Arial", 12F);
+            this.extraAmountText.Increment = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.extraAmountText.Location = new System.Drawing.Point(153, 309);
+            this.extraAmountText.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.extraAmountText.Name = "extraAmountText";
+            this.extraAmountText.Size = new System.Drawing.Size(87, 26);
+            this.extraAmountText.TabIndex = 4;
+            this.extraAmountText.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.extraAmountText.Leave += new System.EventHandler(this.amountText_Leave);
             // 
-            // panel2
+            // label8
             // 
-            this.panel2.AutoScroll = true;
-            this.panel2.Controls.Add(this.monthslbl);
-            this.panel2.Location = new System.Drawing.Point(312, 201);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(166, 148);
-            this.panel2.TabIndex = 106;
+            this.label8.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(-5, 309);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(143, 18);
+            this.label8.TabIndex = 103;
+            this.label8.Text = "අමතර දායකත්ව මුදල";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmPayments
             // 
@@ -516,13 +555,14 @@
             this.panelEx1.PerformLayout();
             this.groupPanel1.ResumeLayout(false);
             this.groupPanel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.amountText)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.extraAmountText)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -561,6 +601,7 @@
         private System.Windows.Forms.Label monthslbl;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel2;
-
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown extraAmountText;
     }
 }

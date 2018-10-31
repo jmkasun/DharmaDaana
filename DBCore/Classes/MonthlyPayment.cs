@@ -14,6 +14,8 @@ namespace DBCore.Classes
         public int MemberID;
         public DateTime Month;
         public int Amount;
+        public int ExtraAmount;
+
 
         public MonthlyPayment()
         {
@@ -31,6 +33,8 @@ namespace DBCore.Classes
             AddParameter("@p_memberID", MemberID);
             AddParameter("@p_month", Month);
             AddParameter("@P_amount", Amount);
+            AddParameter("@P_amount", Amount);
+            AddParameter("@P_extraAmount", Amount);
 
             return ExecuteNonQueryOutput("payments_Add");
         }

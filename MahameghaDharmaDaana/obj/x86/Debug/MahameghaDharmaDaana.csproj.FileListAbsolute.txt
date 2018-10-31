@@ -46,8 +46,6 @@ D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\YBS.exe
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\YBS.pdb
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\DBCore.dll
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\MySql.Data.dll
-D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
-D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\Google.Protobuf.dll
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\DBCore.pdb
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\MySql.Data.xml

@@ -63,6 +63,7 @@ namespace YBS.Forms
                         memInfo.paymentType = (DBCore.PaymentType)paymentTypeCombo.SelectedIndex + 1;
                         memInfo.subscriptionType = (DBCore.SubscriptionType)subscriptionTypeCombo.SelectedIndex + 1;
                         memInfo.nameInMag = nameInmagText.Text;
+                        memInfo.numOfMagazine = (int)numOfMag.Value;
 
                         addAddressToObject(memInfo);
 
@@ -169,6 +170,8 @@ namespace YBS.Forms
             setUserPermissions();
             adressGrid.Rows.Clear();
             nameTextBoxX.Focus();
+            numOfMag.Value = 0;
+
             SetIndexField();
         }
 
@@ -463,6 +466,7 @@ namespace YBS.Forms
             nameInmagText.Text = memInfo.nameInMag;
             amountTxt.Value = memInfo.Amount;
             memInfo.SetAddresses(memberID);
+            numOfMag.Value = memInfo.numOfMagazine;
 
             setAddresses(memInfo.sentAddress);
         }
@@ -843,6 +847,14 @@ namespace YBS.Forms
         private void homeTpText_Enter(object sender, EventArgs e)
         {
             Changelanguage();
-        }       
+        }
+
+        private void adressGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if(e.RowIndex >= 0)
+            {
+
+            }
+        }
     }
 }
