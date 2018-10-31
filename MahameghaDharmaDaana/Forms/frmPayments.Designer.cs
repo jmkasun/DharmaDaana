@@ -38,6 +38,8 @@
             this.cancelbtn = new DevComponents.DotNetBar.ButtonX();
             this.addbtn = new DevComponents.DotNetBar.ButtonX();
             this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.adhiPohoyaTick = new System.Windows.Forms.CheckBox();
+            this.paidDate = new System.Windows.Forms.DateTimePicker();
             this.panel2 = new System.Windows.Forms.Panel();
             this.monthslbl = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,18 +56,24 @@
             this.nameText = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.month = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
             this.monthCombo = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.yearText = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.amountText = new System.Windows.Forms.NumericUpDown();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
-            this.extraAmountText = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
+            this.extraAmountNum = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.month = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.extraAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateMonth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paidDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelEx1.SuspendLayout();
             this.groupPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -73,7 +81,7 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.amountText)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.extraAmountText)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.extraAmountNum)).BeginInit();
             this.SuspendLayout();
             // 
             // panelEx1
@@ -88,7 +96,7 @@
             this.panelEx1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelEx1.Location = new System.Drawing.Point(0, 0);
             this.panelEx1.Name = "panelEx1";
-            this.panelEx1.Size = new System.Drawing.Size(887, 420);
+            this.panelEx1.Size = new System.Drawing.Size(887, 450);
             this.panelEx1.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx1.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -103,7 +111,7 @@
             this.statusText.AutoSize = true;
             this.statusText.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusText.ForeColor = System.Drawing.Color.Green;
-            this.statusText.Location = new System.Drawing.Point(8, 388);
+            this.statusText.Location = new System.Drawing.Point(8, 419);
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(113, 16);
             this.statusText.TabIndex = 96;
@@ -115,7 +123,7 @@
             this.deleteBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.deleteBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.deleteBtn.Enabled = false;
-            this.deleteBtn.Location = new System.Drawing.Point(398, 388);
+            this.deleteBtn.Location = new System.Drawing.Point(398, 419);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(75, 25);
             this.deleteBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -128,7 +136,7 @@
             // 
             this.cancelbtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.cancelbtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.cancelbtn.Location = new System.Drawing.Point(494, 388);
+            this.cancelbtn.Location = new System.Drawing.Point(494, 419);
             this.cancelbtn.Name = "cancelbtn";
             this.cancelbtn.Size = new System.Drawing.Size(75, 25);
             this.cancelbtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -141,11 +149,11 @@
             // 
             this.addbtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.addbtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.addbtn.Location = new System.Drawing.Point(302, 388);
+            this.addbtn.Location = new System.Drawing.Point(302, 419);
             this.addbtn.Name = "addbtn";
             this.addbtn.Size = new System.Drawing.Size(75, 25);
             this.addbtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.addbtn.TabIndex = 4;
+            this.addbtn.TabIndex = 7;
             this.addbtn.Text = "Insert";
             this.addbtn.Click += new System.EventHandler(this.addbtn_Click);
             // 
@@ -153,21 +161,25 @@
             // 
             this.groupPanel1.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanel1.Controls.Add(this.adhiPohoyaTick);
+            this.groupPanel1.Controls.Add(this.paidDate);
             this.groupPanel1.Controls.Add(this.panel2);
             this.groupPanel1.Controls.Add(this.label6);
             this.groupPanel1.Controls.Add(this.groupBox1);
             this.groupPanel1.Controls.Add(this.panel1);
-            this.groupPanel1.Controls.Add(this.label8);
+            this.groupPanel1.Controls.Add(this.label11);
             this.groupPanel1.Controls.Add(this.label7);
             this.groupPanel1.Controls.Add(this.monthCombo);
+            this.groupPanel1.Controls.Add(this.label8);
             this.groupPanel1.Controls.Add(this.yearText);
+            this.groupPanel1.Controls.Add(this.label9);
+            this.groupPanel1.Controls.Add(this.extraAmountNum);
             this.groupPanel1.Controls.Add(this.label3);
             this.groupPanel1.Controls.Add(this.label1);
-            this.groupPanel1.Controls.Add(this.extraAmountText);
             this.groupPanel1.Controls.Add(this.amountText);
             this.groupPanel1.Location = new System.Drawing.Point(7, 30);
             this.groupPanel1.Name = "groupPanel1";
-            this.groupPanel1.Size = new System.Drawing.Size(868, 355);
+            this.groupPanel1.Size = new System.Drawing.Size(868, 383);
             // 
             // 
             // 
@@ -199,11 +211,31 @@
             this.groupPanel1.StyleMouseOver.Class = "";
             this.groupPanel1.TabIndex = 1;
             // 
+            // adhiPohoyaTick
+            // 
+            this.adhiPohoyaTick.Enabled = false;
+            this.adhiPohoyaTick.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.adhiPohoyaTick.Location = new System.Drawing.Point(131, 272);
+            this.adhiPohoyaTick.Name = "adhiPohoyaTick";
+            this.adhiPohoyaTick.Size = new System.Drawing.Size(28, 25);
+            this.adhiPohoyaTick.TabIndex = 4;
+            this.adhiPohoyaTick.UseVisualStyleBackColor = true;
+            // 
+            // paidDate
+            // 
+            this.paidDate.CustomFormat = "yyy-MMM-dd";
+            this.paidDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paidDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.paidDate.Location = new System.Drawing.Point(131, 335);
+            this.paidDate.Name = "paidDate";
+            this.paidDate.Size = new System.Drawing.Size(143, 26);
+            this.paidDate.TabIndex = 6;
+            // 
             // panel2
             // 
             this.panel2.AutoScroll = true;
             this.panel2.Controls.Add(this.monthslbl);
-            this.panel2.Location = new System.Drawing.Point(312, 200);
+            this.panel2.Location = new System.Drawing.Point(312, 201);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(166, 148);
             this.panel2.TabIndex = 106;
@@ -221,7 +253,7 @@
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("UN-Emanee", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(309, 178);
+            this.label6.Location = new System.Drawing.Point(309, 179);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(150, 16);
             this.label6.TabIndex = 105;
@@ -242,7 +274,7 @@
             this.groupBox1.Controls.Add(this.nameText);
             this.groupBox1.Location = new System.Drawing.Point(12, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(534, 163);
+            this.groupBox1.Size = new System.Drawing.Size(492, 169);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "සාමාජික විස්තර";
@@ -252,7 +284,7 @@
             this.findButton.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.findButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.findButton.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.findButton.Location = new System.Drawing.Point(474, 12);
+            this.findButton.Location = new System.Drawing.Point(387, 16);
             this.findButton.Name = "findButton";
             this.findButton.Size = new System.Drawing.Size(54, 24);
             this.findButton.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -345,7 +377,7 @@
             this.nameText.Font = new System.Drawing.Font("Arial", 12F);
             this.nameText.Location = new System.Drawing.Point(137, 60);
             this.nameText.Name = "nameText";
-            this.nameText.Size = new System.Drawing.Size(376, 26);
+            this.nameText.Size = new System.Drawing.Size(346, 26);
             this.nameText.TabIndex = 2;
             this.nameText.TabStop = false;
             this.nameText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nameText_KeyUp);
@@ -353,15 +385,17 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Location = new System.Drawing.Point(552, 3);
+            this.panel1.Location = new System.Drawing.Point(510, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(307, 343);
+            this.panel1.Size = new System.Drawing.Size(349, 371);
             this.panel1.TabIndex = 104;
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -374,7 +408,11 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.month,
-            this.amount});
+            this.amount,
+            this.extraAmount,
+            this.id,
+            this.dateMonth,
+            this.paidDateTime});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("UN-Emanee", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -383,33 +421,21 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 3);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(301, 337);
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(343, 365);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.TabStop = false;
-            // 
-            // month
-            // 
-            this.month.FillWeight = 131.9797F;
-            this.month.HeaderText = "මාසය";
-            this.month.Name = "month";
-            this.month.ReadOnly = true;
-            // 
-            // amount
-            // 
-            this.amount.FillWeight = 68.0203F;
-            this.amount.HeaderText = "ගෙවූ මුදල";
-            this.amount.Name = "amount";
-            this.amount.ReadOnly = true;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(30, 224);
+            this.label7.Location = new System.Drawing.Point(17, 212);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(108, 18);
             this.label7.TabIndex = 103;
@@ -433,16 +459,26 @@
             "ඔක්තෝම්බර්",
             "නොවැම්බර්",
             "දෙසැම්බර්"});
-            this.monthCombo.Location = new System.Drawing.Point(153, 268);
+            this.monthCombo.Location = new System.Drawing.Point(131, 243);
             this.monthCombo.Name = "monthCombo";
             this.monthCombo.Size = new System.Drawing.Size(143, 26);
             this.monthCombo.TabIndex = 3;
             this.monthCombo.SelectedIndexChanged += new System.EventHandler(this.monthCombo_SelectedIndexChanged);
             // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(6, 335);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(123, 23);
+            this.label8.TabIndex = 98;
+            this.label8.Text = "ගෙවන ලද දිනය ";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // yearText
             // 
             this.yearText.Font = new System.Drawing.Font("Arial", 12F);
-            this.yearText.Location = new System.Drawing.Point(153, 181);
+            this.yearText.Location = new System.Drawing.Point(131, 181);
             this.yearText.Name = "yearText";
             this.yearText.ReadOnly = true;
             this.yearText.Size = new System.Drawing.Size(87, 26);
@@ -450,12 +486,22 @@
             this.yearText.TabStop = false;
             this.yearText.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.yearText_MouseDoubleClick);
             // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(8, 270);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(123, 27);
+            this.label9.TabIndex = 98;
+            this.label9.Text = "අධි පොහොය ";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(15, 267);
+            this.label3.Location = new System.Drawing.Point(6, 239);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(123, 18);
+            this.label3.Size = new System.Drawing.Size(123, 27);
             this.label3.TabIndex = 98;
             this.label3.Text = "ආරම්භක මාසය ";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -463,7 +509,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(76, 182);
+            this.label1.Location = new System.Drawing.Point(63, 184);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 18);
             this.label1.TabIndex = 98;
@@ -478,7 +524,7 @@
             0,
             0,
             0});
-            this.amountText.Location = new System.Drawing.Point(153, 224);
+            this.amountText.Location = new System.Drawing.Point(131, 212);
             this.amountText.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -505,45 +551,82 @@
             this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
             this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
             // 
-            // extraAmountText
+            // extraAmountNum
             // 
-            this.extraAmountText.Font = new System.Drawing.Font("Arial", 12F);
-            this.extraAmountText.Increment = new decimal(new int[] {
+            this.extraAmountNum.Font = new System.Drawing.Font("Arial", 12F);
+            this.extraAmountNum.Increment = new decimal(new int[] {
             500,
             0,
             0,
             0});
-            this.extraAmountText.Location = new System.Drawing.Point(153, 309);
-            this.extraAmountText.Maximum = new decimal(new int[] {
+            this.extraAmountNum.Location = new System.Drawing.Point(131, 301);
+            this.extraAmountNum.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.extraAmountText.Name = "extraAmountText";
-            this.extraAmountText.Size = new System.Drawing.Size(87, 26);
-            this.extraAmountText.TabIndex = 4;
-            this.extraAmountText.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.extraAmountText.Leave += new System.EventHandler(this.amountText_Leave);
+            this.extraAmountNum.Name = "extraAmountNum";
+            this.extraAmountNum.Size = new System.Drawing.Size(87, 26);
+            this.extraAmountNum.TabIndex = 5;
             // 
-            // label8
+            // label11
             // 
-            this.label8.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(-5, 309);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(143, 18);
-            this.label8.TabIndex = 103;
-            this.label8.Text = "අමතර දායකත්ව මුදල";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label11.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(-3, 303);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(128, 18);
+            this.label11.TabIndex = 103;
+            this.label11.Text = "අමතර ආධාර මුදල";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // month
+            // 
+            this.month.HeaderText = "මාසය";
+            this.month.MinimumWidth = 100;
+            this.month.Name = "month";
+            this.month.ReadOnly = true;
+            // 
+            // amount
+            // 
+            this.amount.FillWeight = 70F;
+            this.amount.HeaderText = "ගෙවූ මුදල";
+            this.amount.Name = "amount";
+            this.amount.ReadOnly = true;
+            // 
+            // extraAmount
+            // 
+            this.extraAmount.FillWeight = 70F;
+            this.extraAmount.HeaderText = "අමතර මුදල";
+            this.extraAmount.MinimumWidth = 65;
+            this.extraAmount.Name = "extraAmount";
+            this.extraAmount.ReadOnly = true;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // dateMonth
+            // 
+            this.dateMonth.HeaderText = "dateMonth";
+            this.dateMonth.Name = "dateMonth";
+            this.dateMonth.ReadOnly = true;
+            this.dateMonth.Visible = false;
+            // 
+            // paidDateTime
+            // 
+            this.paidDateTime.HeaderText = "paidDate";
+            this.paidDateTime.Name = "paidDateTime";
+            this.paidDateTime.ReadOnly = true;
+            this.paidDateTime.Visible = false;
             // 
             // frmPayments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(887, 420);
+            this.ClientSize = new System.Drawing.Size(887, 450);
             this.Controls.Add(this.panelEx1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -562,7 +645,7 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.amountText)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.extraAmountText)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.extraAmountNum)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -596,12 +679,20 @@
         private System.Windows.Forms.TextBox homeTpText;
         private System.DirectoryServices.DirectorySearcher directorySearcher1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn month;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.Label monthslbl;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown extraAmountText;
+        private System.Windows.Forms.DateTimePicker paidDate;
+        private System.Windows.Forms.CheckBox adhiPohoyaTick;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown extraAmountNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn month;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn extraAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateMonth;
+        private System.Windows.Forms.DataGridViewTextBoxColumn paidDateTime;
     }
 }

@@ -37,13 +37,11 @@ namespace YBS.Forms
                     {
                         using (MonthlyPayment pay = new MonthlyPayment(true))
                         {
-
-                            
-
                             setObjectFromFieldValues(pay, i);
 
-                            if (paymentID == 0)
+                            if (paymentID == 0 && pay.MemberID > 0)
                             {
+
                                 if (pay.Add() == 1)
                                 {
                                     // MessageView.ShowMsg("Sucessfully Added");
@@ -53,7 +51,7 @@ namespace YBS.Forms
                                     statusText.Visible = true;
                                     timer1.Enabled = true;
 
-                                    
+                                    clear(1);
                                 }
 
                             }
@@ -61,31 +59,27 @@ namespace YBS.Forms
                             {
                                 pay.ID = paymentID;
 
-                                if (MessageView.ShowQuestionMsg("Update Address") == DialogResult.OK)
+                                if (MessageView.ShowQuestionMsg("Update record") == DialogResult.OK)
                                 {
 
                                     if (pay.Update() == 1)
-                                    {
-                                        MessageView.ShowMsg("Sucessfully Updated");
+                                    {                                        
+                                        SetHistryGrid(pay.GetPaymentHistry());
 
-                                        //errorProvider1.SetError(idTxt, string.Empty);
-                                        //errorProvider1.SetError(nameTxt, string.Empty);
+                                        extraAmountNum.Value = 0;
 
                                     }
                                 }
                             }
                         }
                     }
-
-                    clear();
                 }
-
             }
             catch (Exception ex)
             {
                 MessageView.ShowErrorMsg(ex.Message);
             }
-        }
+        }    
 
         private void setObjectFromFieldValues(MonthlyPayment pay, int monthNumber)
         {
@@ -93,9 +87,10 @@ namespace YBS.Forms
             int year = Int32.Parse(yearText.Text) + ((monthCombo.SelectedIndex + monthNumber) / 12);
 
             pay.MemberID = memberID;
-            pay.Month = new DateTime(year, month, 1);
+            pay.Month = new DateTime(year, month, adhiPohoyaTick.Checked == true ? 2 : 1);
             pay.Amount = monthlyAmount;
-            pay.ExtraAmount = (int)extraAmountText.Value;
+            pay.paidDate = paidDate.Value;
+            pay.ExtraAmount = (int)extraAmountNum.Value;
         }
 
 
@@ -104,17 +99,18 @@ namespace YBS.Forms
             regNumText.Text = addr.OrderNumber.ToString();
             amountText.Value = addr.numOfMag;
             nameText.Text = addr.ContactName;
+
         }
 
 
 
-        private void clear()
+        private void clear(int type)
         {
             paymentID = 0;
             memberID = 0;
             addbtn.Text = "Insert";
             deleteBtn.Enabled = false;
-
+            amountText.Maximum = 100000;
             regNumText.Focus();
             regNumText.Clear();
             nameText.Clear();
@@ -125,7 +121,11 @@ namespace YBS.Forms
 
             dataGridView1.Rows.Clear();
 
+
+            extraAmountNum.Value = 0;
             setUserPermissions();
+            adhiPohoyaTick.Checked = false;
+            paidDate.Value = DateTime.Now;
         }
 
         private bool ValidateBeforeAdd()
@@ -145,7 +145,7 @@ namespace YBS.Forms
 
         private void cancelbtn_Click(object sender, EventArgs e)
         {
-            clear();
+            clear(0);
         }
 
         private void findButton_Click(object sender, EventArgs e)
@@ -213,10 +213,9 @@ namespace YBS.Forms
             using (MonthlyPayment pay = new MonthlyPayment(true))
             {
                 pay.MemberID = memInfo.ID;
-                SetHistryGrid(pay.GetPaymentHistry());
-
-
+                SetHistryGrid(pay.GetPaymentHistry());                
             }
+
             amountText.Focus();
             amountText.Select(0, 5);
         }
@@ -245,16 +244,16 @@ namespace YBS.Forms
 
 
             setUserPermissions();
-            clear();
+            clear(0);
         }
 
         private void regNumText_KeyUp(object sender, KeyEventArgs e)
         {
-            
+
             if (e.KeyCode == Keys.Enter)
             {
                 selectMember();
-            } 
+            }
         }
 
         private void selectMember()
@@ -280,19 +279,20 @@ namespace YBS.Forms
             foreach (PaymentHistry p in list)
             {
                 DataGridViewRow row = new DataGridViewRow();
-                DataGridViewTextBoxCell cell1 = new DataGridViewTextBoxCell();
-                DataGridViewTextBoxCell cell2 = new DataGridViewTextBoxCell();
 
-                cell1.Value = p.Month.Year + "   " + monthCombo.Items[p.Month.Month - 1].ToString();
-                cell2.Value = p.Amount;
+                // DataGridViewTextBoxCell id = new DataGridViewTextBoxCell();
 
-                row.Cells.Add(cell1);
-                row.Cells.Add(cell2);
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.Month.Year + "   " + monthCombo.Items[p.Month.Month - 1].ToString() });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.Amount });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.ExtraAmount == 0 ? "" : p.ExtraAmount.ToString() });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.Id });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.Month });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.PaidDate });
 
-                dataGridView1.Rows.Add(row);                     
+                dataGridView1.Rows.Add(row);
             }
         }
-        
+
 
         private void setMemberFields(MemberInfo memInfo)
         {
@@ -342,6 +342,14 @@ namespace YBS.Forms
                 int numberofMonths = (int)amountText.Value / monthlyAmount;
                 monthslbl.Text = "";
 
+                if (numberofMonths == 1)
+                {
+                    adhiPohoyaTick.Enabled = true;
+                }
+                else
+                {
+                    adhiPohoyaTick.Enabled = false;
+                }
 
                 for (int i = 0; i < numberofMonths; i++)
                 {
@@ -358,6 +366,26 @@ namespace YBS.Forms
         private void regNumText_Leave(object sender, EventArgs e)
         {
             selectMember();
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewCellCollection Cells = dataGridView1.Rows[e.RowIndex].Cells;
+
+            paymentID = Int32.Parse(Cells["id"].Value.ToString());
+            DateTime month = (DateTime)Cells["dateMonth"].Value;
+
+            yearText.Text = month.Year.ToString();
+            monthCombo.SelectedIndex = month.Month - 1;
+
+            amountText.Value = Int32.Parse(Cells["amount"].Value.ToString());
+            string extAmount = Cells["extraAmount"].Value.ToString();
+
+            extraAmountNum.Value = string.IsNullOrEmpty(extAmount) ? 0 : Int32.Parse(extAmount);
+            paidDate.Value = ((DateTime)Cells["paidDateTime"].Value) == new DateTime() ? paidDate.MinDate : (DateTime)Cells["paidDateTime"].Value;
+
+            addbtn.Text = "Update";
+            amountText.Maximum = monthlyAmount;
         }
     }
 }

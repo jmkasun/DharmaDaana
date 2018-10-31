@@ -14,8 +14,8 @@ namespace DBCore.Classes
         public int MemberID;
         public DateTime Month;
         public int Amount;
+        public DateTime paidDate;
         public int ExtraAmount;
-
 
         public MonthlyPayment()
         {
@@ -33,8 +33,8 @@ namespace DBCore.Classes
             AddParameter("@p_memberID", MemberID);
             AddParameter("@p_month", Month);
             AddParameter("@P_amount", Amount);
-            AddParameter("@P_amount", Amount);
-            AddParameter("@P_extraAmount", Amount);
+            AddParameter("@p_paidDate", paidDate.Date);
+            AddParameter("@P_extraAmount", ExtraAmount);
 
             return ExecuteNonQueryOutput("payments_Add");
         }
@@ -51,7 +51,14 @@ namespace DBCore.Classes
 
         public int Update()
         {
-            throw new NotImplementedException();
+            AddParameter("@p_id", ID);
+            AddParameter("@p_memberID", MemberID);
+            AddParameter("@p_month", Month);
+            AddParameter("@P_amount", Amount);
+            AddParameter("@p_paidDate", paidDate.Date);
+            AddParameter("@P_extraAmount", ExtraAmount);
+
+            return ExecuteNonQueryOutput("payment_upd");
         }
 
         public System.Data.DataTable SelectFind()
@@ -61,6 +68,8 @@ namespace DBCore.Classes
 
         public List<PaymentHistry> GetPaymentHistry()
         {
+            ClearParameters();
+
             List<PaymentHistry> histry = new List<PaymentHistry>();
 
             AddParameter("@p_memberID", MemberID);
@@ -69,7 +78,8 @@ namespace DBCore.Classes
             {
                 while (reader.Read())
                 {
-                    histry.Add(new PaymentHistry(reader.GetDateTime(0), reader.GetInt32(1)));
+                    histry.Add(new PaymentHistry(reader.GetInt32(0), reader.GetDateTime(1),
+                        reader.GetInt32(2), reader.GetInt32(3), reader[4] == DBNull.Value ? new DateTime() : reader.GetDateTime(4)));
                 }
             }
 
@@ -79,13 +89,19 @@ namespace DBCore.Classes
 
     public struct PaymentHistry
     {
+        public int Id;
         public DateTime Month;
         public int Amount;
+        public int ExtraAmount;
+        public DateTime PaidDate;
 
-        public PaymentHistry(DateTime month,int amount)
+        public PaymentHistry(int id, DateTime month,int amount, int extraAmount,DateTime paidDate)
         {
+            Id = id;
             Month = month;
             Amount = amount;
+            ExtraAmount = extraAmount;
+            PaidDate = paidDate;
         }
     }
 }
