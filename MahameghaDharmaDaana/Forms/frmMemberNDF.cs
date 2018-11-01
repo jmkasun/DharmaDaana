@@ -13,7 +13,7 @@ using System.IO;
 using System.Drawing.Imaging;
 using System.Net.Mail;
 using DevComponents.Editors;
-
+using YBS.Common.MsgBox;
 
 namespace YBS.Forms
 {
@@ -28,6 +28,7 @@ namespace YBS.Forms
         int findListSelectedIndex = -1;
         DBCore.UserLevel userLevel = DBCore.UserLevel.SystemUser;
         int magazinePrice = 0;
+        string note;
 
         public frmMemberNDF(int permissionLevel)
         {
@@ -64,6 +65,7 @@ namespace YBS.Forms
                         memInfo.subscriptionType = (DBCore.SubscriptionType)subscriptionTypeCombo.SelectedIndex + 1;
                         memInfo.nameInMag = nameInmagText.Text;
                         memInfo.numOfMagazine = (int)numOfMag.Value;
+                        memInfo.Note = note;
 
                         addAddressToObject(memInfo);
 
@@ -171,6 +173,7 @@ namespace YBS.Forms
             adressGrid.Rows.Clear();
             nameTextBoxX.Focus();
             numOfMag.Value = 0;
+            note = "";
 
             SetIndexField();
         }
@@ -467,6 +470,7 @@ namespace YBS.Forms
             amountTxt.Value = memInfo.Amount;
             memInfo.SetAddresses(memberID);
             numOfMag.Value = memInfo.numOfMagazine;
+            note = memInfo.Note;
 
             setAddresses(memInfo.sentAddress);
         }
@@ -855,6 +859,11 @@ namespace YBS.Forms
             {
 
             }
+        }
+
+        private void buttonX1_Click(object sender, EventArgs e)
+        {
+            note = new frmNote().getNote(note);
         }
     }
 }

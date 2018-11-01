@@ -79,6 +79,12 @@
       <DependentUpon>frmSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\MessageView.cs" />
+    <Compile Include="Common\MsgBox\frmNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\MsgBox\frmNote.Designer.cs">
+      <DependentUpon>frmNote.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\MsgBox\frmMsgOkOnly.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Common\frmSearch.resx">
       <DependentUpon>frmSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\MsgBox\frmNote.resx">
+      <DependentUpon>frmNote.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Common\MsgBox\frmMsgOkOnly.resx">
       <DependentUpon>frmMsgOkOnly.cs</DependentUpon>

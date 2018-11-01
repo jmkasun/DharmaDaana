@@ -49,3 +49,4 @@ D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\MySql.Data.dll
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\Google.Protobuf.dll
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\DBCore.pdb
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\MySql.Data.xml
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Common.MsgBox.frmNote.resources

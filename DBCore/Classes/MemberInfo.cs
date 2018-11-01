@@ -24,6 +24,8 @@ namespace DBCore.Classes
         public int DataVerified;
         public List<MemberAddress> sentAddress;
         public int numOfMagazine;
+        public string Note;
+
 
         #region IDBFunctions Members
 
@@ -52,6 +54,7 @@ namespace DBCore.Classes
             AddParameter("@P_subscriptionType",subscriptionType );
             AddParameter("@P_nameInMag", nameInMag);
             AddParameter("@p_ID", MySqlDbType.Int32);
+            AddParameter("@p_note", Note);
 
 
             int ret = ExecuteNonQueryOutput("Member_Add");
@@ -94,6 +97,7 @@ namespace DBCore.Classes
             AddParameter("@P_subscriptionType", subscriptionType);
             AddParameter("@P_nameInMag", nameInMag);
             AddParameter("@P_numOfMagazine", numOfMagazine);
+            AddParameter("@p_note", Note);
 
             AddParameter("@p_ID", ID);
 
@@ -148,6 +152,7 @@ namespace DBCore.Classes
                     subscriptionType = (SubscriptionType) reader.GetInt32(9);
                     nameInMag = reader.GetString(10);
                     numOfMagazine = reader.GetInt32(11);
+                    Note = reader[12]==DBNull.Value?"": reader[12].ToString();
                 } 
             }
 
@@ -180,6 +185,7 @@ namespace DBCore.Classes
                     nameInMag = reader.GetString(10);                    
                     ID = reader.GetInt32(11);
                     numOfMagazine = reader.GetInt32(12);
+                    Note = reader.GetString(13);
                 } 
             }
 

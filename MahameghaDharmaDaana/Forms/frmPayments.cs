@@ -387,5 +387,13 @@ namespace YBS.Forms
             addbtn.Text = "Update";
             amountText.Maximum = monthlyAmount;
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(paymentTypeCombo.SelectedIndex == 0)
+            {
+                receptNum.Visible = true;
+            }
+        }
     }
 }

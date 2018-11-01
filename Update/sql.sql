@@ -1,6 +1,9 @@
 ALTER TABLE `mahameghadharmadaana`.`member` 
 ADD COLUMN `numOfMagazine` INT NULL AFTER `bank`;
 
+ALTER TABLE `mahameghadharmadaana`.`member` 
+ADD COLUMN `note` VARCHAR(8000) NULL AFTER `nameInMag`;
+
 UPDATE `mahameghadharmadaana`.`member`  SET numOfMagazine = 0 WHERE ID > 0;
 
 USE `mahameghadharmadaana`;
