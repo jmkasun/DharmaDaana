@@ -4,7 +4,8 @@ ADD COLUMN `numOfMagazine` INT NULL AFTER `bank`;
 ALTER TABLE `mahameghadharmadaana`.`member` 
 ADD COLUMN `note` VARCHAR(8000) NULL AFTER `nameInMag`;
 
-UPDATE `mahameghadharmadaana`.`member`  SET numOfMagazine = 0 WHERE ID > 0;
+UPDATE `mahameghadharmadaana`.`member`  SET numOfMagazine = 0 WHERE ID > 0 AND numOfMagazine is null;
+UPDATE `mahameghadharmadaana`.`member`  SET note = '' WHERE ID > 0 AND note is null;
 
 USE `mahameghadharmadaana`;
 DROP procedure IF EXISTS `Member_Sel`;
@@ -12,7 +13,7 @@ DROP procedure IF EXISTS `Member_Sel`;
 ALTER TABLE `mahameghadharmadaana`.`payments` 
 ADD COLUMN `extraAmount` INT NULL AFTER `addedDate`;
 
-UPDATE payments SET extraAmount = 0 WHERE ID > 0;
+UPDATE payments SET extraAmount = 0 WHERE ID > 0 AND extraAmount is null;
 
 DELIMITER $$
 USE `mahameghadharmadaana`$$

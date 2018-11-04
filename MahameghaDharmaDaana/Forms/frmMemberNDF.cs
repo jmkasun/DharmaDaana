@@ -17,7 +17,7 @@ using YBS.Common.MsgBox;
 
 namespace YBS.Forms
 {
-    public partial class frmMemberNDF : DevComponents.DotNetBar.Office2007Form
+    public partial class frmMemberNDF : Form
     {
         int memberID = 0;
         byte[] imageData = null;

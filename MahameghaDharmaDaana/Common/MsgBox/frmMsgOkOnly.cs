@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace  YBS.Common
 {
-    public partial class frmMsgOkOnly : DevComponents.DotNetBar.Office2007Form
+    public partial class frmMsgOkOnly : Form
     {
         string message = "Xtreme Soft Solutions";
         string title = "Xtreme Soft Solutions";

@@ -56,35 +56,35 @@
             this.nameText = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label7 = new System.Windows.Forms.Label();
-            this.monthCombo = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.yearText = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.amountText = new System.Windows.Forms.NumericUpDown();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
-            this.extraAmountNum = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
             this.month = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.extraAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateMonth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.paidDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.paymentTypeCombo = new System.Windows.Forms.ComboBox();
+            this.monthCombo = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.receptNum = new System.Windows.Forms.TextBox();
+            this.yearText = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.extraAmountNum = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.amountText = new System.Windows.Forms.NumericUpDown();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
             this.panelEx1.SuspendLayout();
             this.groupPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.amountText)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.extraAmountNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.amountText)).BeginInit();
             this.SuspendLayout();
             // 
             // panelEx1
@@ -438,6 +438,59 @@
             this.dataGridView1.TabStop = false;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
+            // month
+            // 
+            this.month.HeaderText = "මාසය";
+            this.month.MinimumWidth = 100;
+            this.month.Name = "month";
+            this.month.ReadOnly = true;
+            // 
+            // amount
+            // 
+            this.amount.FillWeight = 70F;
+            this.amount.HeaderText = "ගෙවූ මුදල";
+            this.amount.Name = "amount";
+            this.amount.ReadOnly = true;
+            // 
+            // extraAmount
+            // 
+            this.extraAmount.FillWeight = 70F;
+            this.extraAmount.HeaderText = "අමතර මුදල";
+            this.extraAmount.MinimumWidth = 65;
+            this.extraAmount.Name = "extraAmount";
+            this.extraAmount.ReadOnly = true;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // dateMonth
+            // 
+            this.dateMonth.HeaderText = "dateMonth";
+            this.dateMonth.Name = "dateMonth";
+            this.dateMonth.ReadOnly = true;
+            this.dateMonth.Visible = false;
+            // 
+            // paidDateTime
+            // 
+            this.paidDateTime.HeaderText = "paidDate";
+            this.paidDateTime.Name = "paidDateTime";
+            this.paidDateTime.ReadOnly = true;
+            this.paidDateTime.Visible = false;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(-3, 280);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(128, 18);
+            this.label11.TabIndex = 103;
+            this.label11.Text = "අමතර ආධාර මුදල";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -447,6 +500,21 @@
             this.label7.TabIndex = 103;
             this.label7.Text = "දායකත්ව මුදල";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // paymentTypeCombo
+            // 
+            this.paymentTypeCombo.Font = new System.Drawing.Font("Arial", 12F);
+            this.paymentTypeCombo.FormattingEnabled = true;
+            this.paymentTypeCombo.Items.AddRange(new object[] {
+            "කාර්යාලය",
+            "BOC",
+            "HNB",
+            "Sampath"});
+            this.paymentTypeCombo.Location = new System.Drawing.Point(131, 346);
+            this.paymentTypeCombo.Name = "paymentTypeCombo";
+            this.paymentTypeCombo.Size = new System.Drawing.Size(143, 26);
+            this.paymentTypeCombo.TabIndex = 3;
+            this.paymentTypeCombo.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // monthCombo
             // 
@@ -481,6 +549,17 @@
             this.label8.Text = "ගෙවන ලද දිනය ";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // receptNum
+            // 
+            this.receptNum.Font = new System.Drawing.Font("Arial", 12F);
+            this.receptNum.Location = new System.Drawing.Point(280, 346);
+            this.receptNum.Name = "receptNum";
+            this.receptNum.Size = new System.Drawing.Size(109, 26);
+            this.receptNum.TabIndex = 1;
+            this.receptNum.TabStop = false;
+            this.receptNum.Visible = false;
+            this.receptNum.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.yearText_MouseDoubleClick);
+            // 
             // yearText
             // 
             this.yearText.Font = new System.Drawing.Font("Arial", 12F);
@@ -501,6 +580,34 @@
             this.label9.TabIndex = 98;
             this.label9.Text = "අධි පොහොය ";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(6, 342);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(123, 27);
+            this.label12.TabIndex = 98;
+            this.label12.Text = "ගෙවූ ආකාරය";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // extraAmountNum
+            // 
+            this.extraAmountNum.Font = new System.Drawing.Font("Arial", 12F);
+            this.extraAmountNum.Increment = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.extraAmountNum.Location = new System.Drawing.Point(131, 278);
+            this.extraAmountNum.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.extraAmountNum.Name = "extraAmountNum";
+            this.extraAmountNum.Size = new System.Drawing.Size(87, 26);
+            this.extraAmountNum.TabIndex = 5;
             // 
             // label3
             // 
@@ -557,114 +664,6 @@
             this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
             this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
             // 
-            // extraAmountNum
-            // 
-            this.extraAmountNum.Font = new System.Drawing.Font("Arial", 12F);
-            this.extraAmountNum.Increment = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.extraAmountNum.Location = new System.Drawing.Point(131, 278);
-            this.extraAmountNum.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.extraAmountNum.Name = "extraAmountNum";
-            this.extraAmountNum.Size = new System.Drawing.Size(87, 26);
-            this.extraAmountNum.TabIndex = 5;
-            // 
-            // label11
-            // 
-            this.label11.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(-3, 280);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(128, 18);
-            this.label11.TabIndex = 103;
-            this.label11.Text = "අමතර ආධාර මුදල";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // month
-            // 
-            this.month.HeaderText = "මාසය";
-            this.month.MinimumWidth = 100;
-            this.month.Name = "month";
-            this.month.ReadOnly = true;
-            // 
-            // amount
-            // 
-            this.amount.FillWeight = 70F;
-            this.amount.HeaderText = "ගෙවූ මුදල";
-            this.amount.Name = "amount";
-            this.amount.ReadOnly = true;
-            // 
-            // extraAmount
-            // 
-            this.extraAmount.FillWeight = 70F;
-            this.extraAmount.HeaderText = "අමතර මුදල";
-            this.extraAmount.MinimumWidth = 65;
-            this.extraAmount.Name = "extraAmount";
-            this.extraAmount.ReadOnly = true;
-            // 
-            // id
-            // 
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // dateMonth
-            // 
-            this.dateMonth.HeaderText = "dateMonth";
-            this.dateMonth.Name = "dateMonth";
-            this.dateMonth.ReadOnly = true;
-            this.dateMonth.Visible = false;
-            // 
-            // paidDateTime
-            // 
-            this.paidDateTime.HeaderText = "paidDate";
-            this.paidDateTime.Name = "paidDateTime";
-            this.paidDateTime.ReadOnly = true;
-            this.paidDateTime.Visible = false;
-            // 
-            // label12
-            // 
-            this.label12.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(6, 342);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(123, 27);
-            this.label12.TabIndex = 98;
-            this.label12.Text = "ගෙවූ ආකාරය";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // paymentTypeCombo
-            // 
-            this.paymentTypeCombo.Font = new System.Drawing.Font("Arial", 12F);
-            this.paymentTypeCombo.FormattingEnabled = true;
-            this.paymentTypeCombo.Items.AddRange(new object[] {
-            "කාර්යාලය",
-            "BOC",
-            "HNB",
-            "Sampath"});
-            this.paymentTypeCombo.Location = new System.Drawing.Point(131, 346);
-            this.paymentTypeCombo.Name = "paymentTypeCombo";
-            this.paymentTypeCombo.Size = new System.Drawing.Size(143, 26);
-            this.paymentTypeCombo.TabIndex = 3;
-            this.paymentTypeCombo.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // receptNum
-            // 
-            this.receptNum.Font = new System.Drawing.Font("Arial", 12F);
-            this.receptNum.Location = new System.Drawing.Point(280, 346);
-            this.receptNum.Name = "receptNum";
-            this.receptNum.ReadOnly = true;
-            this.receptNum.Size = new System.Drawing.Size(109, 26);
-            this.receptNum.TabIndex = 1;
-            this.receptNum.TabStop = false;
-            this.receptNum.Visible = false;
-            this.receptNum.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.yearText_MouseDoubleClick);
-            // 
             // frmPayments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -687,8 +686,8 @@
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.amountText)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.extraAmountNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.amountText)).EndInit();
             this.ResumeLayout(false);
 
         }

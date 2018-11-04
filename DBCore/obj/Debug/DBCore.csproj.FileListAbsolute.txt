@@ -18,6 +18,7 @@ E:\Projects\Personal\Amawathura\MahameghaDharmaDaana\DBCore\bin\Debug\DBCore.pdb
 E:\Projects\Personal\Amawathura\MahameghaDharmaDaana\DBCore\obj\Debug\DBCore.csprojResolveAssemblyReference.cache
 E:\Projects\Personal\Amawathura\MahameghaDharmaDaana\DBCore\obj\Debug\DBCore.dll
 E:\Projects\Personal\Amawathura\MahameghaDharmaDaana\DBCore\obj\Debug\DBCore.pdb
+D:\Projects Kasun\DharmaDaana\DBCore\bin\Debug\DBCore.dll.config
 D:\Projects Kasun\DharmaDaana\DBCore\bin\Debug\DBCore.dll
 D:\Projects Kasun\DharmaDaana\DBCore\bin\Debug\DBCore.pdb
 D:\Projects Kasun\DharmaDaana\DBCore\bin\Debug\MySql.Data.dll

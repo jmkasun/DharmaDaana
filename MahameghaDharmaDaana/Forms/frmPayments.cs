@@ -12,7 +12,7 @@ using System.Collections;
 
 namespace YBS.Forms
 {
-    public partial class frmPayments : DevComponents.DotNetBar.Office2007Form
+    public partial class frmPayments : Form
     {
         int paymentID = 0;
         int memberID = 0;
@@ -32,17 +32,19 @@ namespace YBS.Forms
             {
                 if (ValidateBeforeAdd())
                 {
-                    int numberofMonths = (int)amountText.Value / monthlyAmount;
-                    for (int i = 0; i < numberofMonths; i++)
+
+                    using (MonthlyPayment pay = new MonthlyPayment(true))
                     {
-                        using (MonthlyPayment pay = new MonthlyPayment(true))
+
+
+                        if (paymentID == 0 && monthlyAmount > 0)
                         {
-                            setObjectFromFieldValues(pay, i);
-
-                            if (paymentID == 0 && pay.MemberID > 0)
+                            int numberofMonths = (int)amountText.Value / monthlyAmount;
+                            for (int i = 0; i < numberofMonths; i++)
                             {
+                                setObjectFromFieldValues(pay, i);
 
-                                if (pay.Add() == 1)
+                                if (pay.MemberID > 0 && pay.Add() == 1)
                                 {
                                     // MessageView.ShowMsg("Sucessfully Added");
 
@@ -53,33 +55,35 @@ namespace YBS.Forms
 
                                     clear(1);
                                 }
-
                             }
-                            else
+
+                        }
+                        else if (memberID > 0)
+                        {
+                            pay.ID = paymentID;
+                            setObjectFromFieldValues(pay, 0);
+
+                            if (MessageView.ShowQuestionMsg("Update record") == DialogResult.OK)
                             {
-                                pay.ID = paymentID;
 
-                                if (MessageView.ShowQuestionMsg("Update record") == DialogResult.OK)
+                                if (pay.Update() == 1)
                                 {
+                                    SetHistryGrid(pay.GetPaymentHistry());
 
-                                    if (pay.Update() == 1)
-                                    {                                        
-                                        SetHistryGrid(pay.GetPaymentHistry());
+                                    extraAmountNum.Value = 0;
 
-                                        extraAmountNum.Value = 0;
-
-                                    }
                                 }
                             }
                         }
                     }
+
                 }
             }
             catch (Exception ex)
             {
                 MessageView.ShowErrorMsg(ex.Message);
             }
-        }    
+        }
 
         private void setObjectFromFieldValues(MonthlyPayment pay, int monthNumber)
         {
@@ -213,7 +217,7 @@ namespace YBS.Forms
             using (MonthlyPayment pay = new MonthlyPayment(true))
             {
                 pay.MemberID = memInfo.ID;
-                SetHistryGrid(pay.GetPaymentHistry());                
+                SetHistryGrid(pay.GetPaymentHistry());
             }
 
             amountText.Focus();
@@ -390,9 +394,13 @@ namespace YBS.Forms
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(paymentTypeCombo.SelectedIndex == 0)
+            if (paymentTypeCombo.SelectedIndex == 0)
             {
                 receptNum.Visible = true;
+            }
+            else
+            {
+                receptNum.Visible = false;
             }
         }
     }

@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMemberNDF));
             this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.numOfMag = new System.Windows.Forms.NumericUpDown();
             this.bankCombo = new System.Windows.Forms.ComboBox();
             this.paymentTypeCombo = new System.Windows.Forms.ComboBox();
@@ -83,7 +84,6 @@
             this.prevBtn = new DevComponents.DotNetBar.ButtonX();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.groupPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numOfMag)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -103,7 +103,6 @@
             this.groupPanel1.AutoScroll = true;
             this.groupPanel1.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanel1.Controls.Add(this.buttonX1);
             this.groupPanel1.Controls.Add(this.numOfMag);
             this.groupPanel1.Controls.Add(this.bankCombo);
             this.groupPanel1.Controls.Add(this.paymentTypeCombo);
@@ -161,6 +160,18 @@
             // 
             this.groupPanel1.StyleMouseOver.Class = "";
             this.groupPanel1.TabIndex = 0;
+            // 
+            // buttonX1
+            // 
+            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX1.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonX1.Location = new System.Drawing.Point(152, 4);
+            this.buttonX1.Name = "buttonX1";
+            this.buttonX1.Size = new System.Drawing.Size(51, 25);
+            this.buttonX1.TabIndex = 95;
+            this.buttonX1.Text = "Note";
+            this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click);
             // 
             // numOfMag
             // 
@@ -655,6 +666,7 @@
             // 
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx1.Controls.Add(this.buttonX1);
             this.panelEx1.Controls.Add(this.statusText);
             this.panelEx1.Controls.Add(this.nextBtn);
             this.panelEx1.Controls.Add(this.prevBtn);
@@ -727,18 +739,6 @@
             // 
             this.timer1.Interval = 2000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // buttonX1
-            // 
-            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX1.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonX1.Location = new System.Drawing.Point(359, 6);
-            this.buttonX1.Name = "buttonX1";
-            this.buttonX1.Size = new System.Drawing.Size(51, 25);
-            this.buttonX1.TabIndex = 95;
-            this.buttonX1.Text = "Note";
-            this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click);
             // 
             // frmMemberNDF
             // 

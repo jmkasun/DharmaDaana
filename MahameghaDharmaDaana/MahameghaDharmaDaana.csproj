@@ -19,7 +19,7 @@
     <SccProvider>SubversionScc</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -38,6 +38,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>mahamevna_logo1_88w_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevComponents.DotNetBar2, Version=8.2.0.2, Culture=neutral, PublicKeyToken=5fd520d36328f741, processorArchitecture=MSIL">
@@ -231,6 +234,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\other.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="mahamevna_logo1_88w_icon.ico" />
+    <Content Include="rrrr_copy_d7v_icon.ico" />
+    <Content Include="rrrr_copy_Xtt_icon.ico" />
+    <None Include="Resources\rrrr_copy_gcc_icon.ico" />
+    <None Include="Resources\Icon.ico" />
+    <Content Include="rrrr_copy_gcc_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
