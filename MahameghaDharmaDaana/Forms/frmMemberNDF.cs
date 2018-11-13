@@ -29,6 +29,8 @@ namespace YBS.Forms
         DBCore.UserLevel userLevel = DBCore.UserLevel.SystemUser;
         int magazinePrice = 0;
         string note;
+        int sentAddressId = 0;
+
 
         public frmMemberNDF(int permissionLevel)
         {
@@ -174,6 +176,7 @@ namespace YBS.Forms
             nameTextBoxX.Focus();
             numOfMag.Value = 0;
             note = "";
+            sentAddressId = 0;
 
             SetIndexField();
         }
@@ -693,16 +696,19 @@ namespace YBS.Forms
             DataGridViewTextBoxCell cell1 = new DataGridViewTextBoxCell();
             DataGridViewTextBoxCell cell2 = new DataGridViewTextBoxCell();
             DataGridViewTextBoxCell cell3 = new DataGridViewTextBoxCell();
+            DataGridViewTextBoxCell cell4 = new DataGridViewTextBoxCell();
 
             cell1.Value = ad.ID;
             cell2.Value = ad.Address;
             cell3.Value = ad.NumOfMag;
+            cell4.Value = ad.Type;
 
 
             //  row.HeaderCell.Value = (otherDatagrid.Rows.Count + 1).ToString();
             row.Cells.Add(cell2);
             row.Cells.Add(cell1);
             row.Cells.Add(cell3);
+            row.Cells.Add(cell4);
 
 
             adressGrid.Rows.Add(row);
@@ -731,6 +737,15 @@ namespace YBS.Forms
         {
             if (sentaAddressTextbox.Text.Length < 1)
                 return;
+
+            AddUpdateAddress();
+
+            ClearAddress();
+
+        }
+
+        private void AddUpdateAddress()
+        {
             MemberAddress ad = new MemberAddress(0, sentaAddressTextbox.Text, (int)numOfMagText.Value, (int)numOfMagText.Value, categoryCombo.SelectedIndex);
 
             if (memberID != 0)
@@ -739,16 +754,18 @@ namespace YBS.Forms
                 {
                     mem.ID = memberID;
                     mem.AddAddress(ad);
-
+                    mem.SetAddresses(memberID);
+                    setAddresses(mem.sentAddress);
                 }
             }
+        }
 
-            AddAddressGridRow(ad);
-
+        private void ClearAddress()
+        {
             sentaAddressTextbox.Clear();
             numOfMagText.Value = 1;
             sentaAddressTextbox.Select();
-
+            sentAddressId = 0;
         }
 
         private void amountTxt_Enter(object sender, EventArgs e)
@@ -864,6 +881,11 @@ namespace YBS.Forms
         private void buttonX1_Click(object sender, EventArgs e)
         {
             note = new frmNote().getNote(note);
+        }
+
+        private void buttonX2_Click(object sender, EventArgs e)
+        {
+            ClearAddress();
         }
     }
 }

@@ -122,7 +122,19 @@ namespace YBS.Forms
 
         private bool ValidateBeforeAdd()
         {
-            return true;
+            bool retVal = true;
+
+            if (string.IsNullOrEmpty(sentaAddressTextbox.Text))
+            {
+                errorProvider1.SetError(sentaAddressTextbox, "Index Number cannot be empty");
+                retVal = false;
+            }
+            else
+            {
+                errorProvider1.SetError(sentaAddressTextbox, "");
+            }
+
+            return retVal;
         }
 
         private void deleteBtn_Click(object sender, EventArgs e)

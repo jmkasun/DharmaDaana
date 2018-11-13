@@ -34,7 +34,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMemberNDF));
             this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.numOfMag = new System.Windows.Forms.NumericUpDown();
             this.bankCombo = new System.Windows.Forms.ComboBox();
             this.paymentTypeCombo = new System.Windows.Forms.ComboBox();
@@ -61,9 +60,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.sentaAddressTextbox = new System.Windows.Forms.TextBox();
             this.adressGrid = new System.Windows.Forms.DataGridView();
-            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numOfMagText = new System.Windows.Forms.NumericUpDown();
             this.addressAddBtn = new DevComponents.DotNetBar.ButtonX();
             this.amountTxt = new System.Windows.Forms.NumericUpDown();
@@ -74,6 +70,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.dataverifiedLabel = new DevComponents.DotNetBar.LabelX();
             this.verifiedCheck = new System.Windows.Forms.CheckBox();
+            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.findButton = new DevComponents.DotNetBar.ButtonX();
             this.deleteBtn = new DevComponents.DotNetBar.ButtonX();
             this.addbtn = new DevComponents.DotNetBar.ButtonX();
@@ -84,6 +81,11 @@
             this.prevBtn = new DevComponents.DotNetBar.ButtonX();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             this.groupPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numOfMag)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -160,18 +162,6 @@
             // 
             this.groupPanel1.StyleMouseOver.Class = "";
             this.groupPanel1.TabIndex = 0;
-            // 
-            // buttonX1
-            // 
-            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX1.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonX1.Location = new System.Drawing.Point(152, 4);
-            this.buttonX1.Name = "buttonX1";
-            this.buttonX1.Size = new System.Drawing.Size(51, 25);
-            this.buttonX1.TabIndex = 95;
-            this.buttonX1.Text = "Note";
-            this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click);
             // 
             // numOfMag
             // 
@@ -375,6 +365,7 @@
             this.groupBox2.Controls.Add(this.sentaAddressTextbox);
             this.groupBox2.Controls.Add(this.adressGrid);
             this.groupBox2.Controls.Add(this.numOfMagText);
+            this.groupBox2.Controls.Add(this.buttonX2);
             this.groupBox2.Controls.Add(this.addressAddBtn);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(423, 60);
@@ -440,38 +431,16 @@
             this.adressGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.address,
             this.ID,
-            this.number});
+            this.numberCol,
+            this.type});
             this.adressGrid.Location = new System.Drawing.Point(6, 203);
             this.adressGrid.Name = "adressGrid";
+            this.adressGrid.ReadOnly = true;
             this.adressGrid.Size = new System.Drawing.Size(482, 171);
             this.adressGrid.TabIndex = 93;
             this.adressGrid.TabStop = false;
             this.adressGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.adressGrid_CellMouseDoubleClick);
             this.adressGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tagGrid_KeyUp);
-            // 
-            // address
-            // 
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.address.DefaultCellStyle = dataGridViewCellStyle1;
-            this.address.FillWeight = 149.2386F;
-            this.address.HeaderText = "ලිපිනය";
-            this.address.Name = "address";
-            // 
-            // ID
-            // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ID.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Visible = false;
-            // 
-            // number
-            // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.number.DefaultCellStyle = dataGridViewCellStyle3;
-            this.number.FillWeight = 50.76142F;
-            this.number.HeaderText = "ප්‍රමාණය";
-            this.number.Name = "number";
             // 
             // numOfMagText
             // 
@@ -497,9 +466,9 @@
             this.addressAddBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.addressAddBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.addressAddBtn.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addressAddBtn.Location = new System.Drawing.Point(405, 144);
+            this.addressAddBtn.Location = new System.Drawing.Point(422, 144);
             this.addressAddBtn.Name = "addressAddBtn";
-            this.addressAddBtn.Size = new System.Drawing.Size(82, 28);
+            this.addressAddBtn.Size = new System.Drawing.Size(65, 29);
             this.addressAddBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.addressAddBtn.TabIndex = 91;
             this.addressAddBtn.Text = "Insert";
@@ -601,6 +570,18 @@
             this.verifiedCheck.UseVisualStyleBackColor = true;
             this.verifiedCheck.CheckedChanged += new System.EventHandler(this.verifiedCheck_CheckedChanged);
             this.verifiedCheck.CheckStateChanged += new System.EventHandler(this.verifiedCheck_CheckedChanged);
+            // 
+            // buttonX1
+            // 
+            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX1.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonX1.Location = new System.Drawing.Point(152, 4);
+            this.buttonX1.Name = "buttonX1";
+            this.buttonX1.Size = new System.Drawing.Size(51, 25);
+            this.buttonX1.TabIndex = 95;
+            this.buttonX1.Text = "Note";
+            this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click);
             // 
             // findButton
             // 
@@ -740,6 +721,53 @@
             this.timer1.Interval = 2000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // address
+            // 
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.address.DefaultCellStyle = dataGridViewCellStyle1;
+            this.address.FillWeight = 149.2386F;
+            this.address.HeaderText = "ලිපිනය";
+            this.address.Name = "address";
+            this.address.ReadOnly = true;
+            // 
+            // ID
+            // 
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ID.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // numberCol
+            // 
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numberCol.DefaultCellStyle = dataGridViewCellStyle3;
+            this.numberCol.FillWeight = 50.76142F;
+            this.numberCol.HeaderText = "සඟරා ගණන";
+            this.numberCol.Name = "numberCol";
+            this.numberCol.ReadOnly = true;
+            // 
+            // type
+            // 
+            this.type.HeaderText = "type";
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            this.type.Visible = false;
+            // 
+            // buttonX2
+            // 
+            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX2.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonX2.Location = new System.Drawing.Point(342, 145);
+            this.buttonX2.Name = "buttonX2";
+            this.buttonX2.Size = new System.Drawing.Size(65, 29);
+            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX2.TabIndex = 91;
+            this.buttonX2.Text = "Clear";
+            this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
+            // 
             // frmMemberNDF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -815,14 +843,16 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label statusText;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn address;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn number;
         private System.Windows.Forms.ComboBox categoryCombo;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.NumericUpDown numOfMag;
         private System.Windows.Forms.Label label15;
         private DevComponents.DotNetBar.ButtonX buttonX1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numberCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn type;
+        private DevComponents.DotNetBar.ButtonX buttonX2;
     }
 }
 

@@ -37,6 +37,8 @@
             this.addbtn = new DevComponents.DotNetBar.ButtonX();
             this.findButton = new DevComponents.DotNetBar.ButtonX();
             this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.addCat = new DevComponents.DotNetBar.ButtonX();
+            this.categoryCombo = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.homeTpText = new System.Windows.Forms.TextBox();
             this.contactNameText = new System.Windows.Forms.TextBox();
@@ -47,17 +49,17 @@
             this.label10 = new System.Windows.Forms.Label();
             this.orderNumText = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.sentaAddressTextbox = new System.Windows.Forms.TextBox();
             this.numOfMagText = new System.Windows.Forms.NumericUpDown();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label4 = new System.Windows.Forms.Label();
-            this.categoryCombo = new System.Windows.Forms.ComboBox();
-            this.addCat = new DevComponents.DotNetBar.ButtonX();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelEx1.SuspendLayout();
             this.groupPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numOfMagText)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelEx1
@@ -73,7 +75,7 @@
             this.panelEx1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelEx1.Location = new System.Drawing.Point(0, 0);
             this.panelEx1.Name = "panelEx1";
-            this.panelEx1.Size = new System.Drawing.Size(497, 465);
+            this.panelEx1.Size = new System.Drawing.Size(515, 465);
             this.panelEx1.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx1.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -163,7 +165,7 @@
             this.groupPanel1.Controls.Add(this.numOfMagText);
             this.groupPanel1.Location = new System.Drawing.Point(7, 36);
             this.groupPanel1.Name = "groupPanel1";
-            this.groupPanel1.Size = new System.Drawing.Size(487, 385);
+            this.groupPanel1.Size = new System.Drawing.Size(508, 385);
             // 
             // 
             // 
@@ -194,6 +196,30 @@
             // 
             this.groupPanel1.StyleMouseOver.Class = "";
             this.groupPanel1.TabIndex = 1;
+            // 
+            // addCat
+            // 
+            this.addCat.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.addCat.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.addCat.Location = new System.Drawing.Point(322, 209);
+            this.addCat.Name = "addCat";
+            this.addCat.Size = new System.Drawing.Size(44, 25);
+            this.addCat.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.addCat.TabIndex = 103;
+            this.addCat.Text = "Add";
+            this.addCat.Click += new System.EventHandler(this.addCat_Click);
+            // 
+            // categoryCombo
+            // 
+            this.categoryCombo.Font = new System.Drawing.Font("Arial", 12F);
+            this.categoryCombo.FormattingEnabled = true;
+            this.categoryCombo.Items.AddRange(new object[] {
+            "මාසික",
+            "වාර්ෂික"});
+            this.categoryCombo.Location = new System.Drawing.Point(144, 209);
+            this.categoryCombo.Name = "categoryCombo";
+            this.categoryCombo.Size = new System.Drawing.Size(172, 26);
+            this.categoryCombo.TabIndex = 102;
             // 
             // groupBox1
             // 
@@ -293,6 +319,15 @@
             this.label3.TabIndex = 99;
             this.label3.Text = "ලිපිනය";
             // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(5, 219);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(106, 18);
+            this.label4.TabIndex = 98;
+            this.label4.Text = "ආයතන වර්ගය";
+            // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -335,44 +370,15 @@
             this.timer1.Interval = 2000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // label4
+            // errorProvider1
             // 
-            this.label4.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(5, 219);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(106, 18);
-            this.label4.TabIndex = 98;
-            this.label4.Text = "ආයතන වර්ගය";
-            // 
-            // categoryCombo
-            // 
-            this.categoryCombo.Font = new System.Drawing.Font("Arial", 12F);
-            this.categoryCombo.FormattingEnabled = true;
-            this.categoryCombo.Items.AddRange(new object[] {
-            "මාසික",
-            "වාර්ෂික"});
-            this.categoryCombo.Location = new System.Drawing.Point(144, 209);
-            this.categoryCombo.Name = "categoryCombo";
-            this.categoryCombo.Size = new System.Drawing.Size(172, 26);
-            this.categoryCombo.TabIndex = 102;
-            // 
-            // addCat
-            // 
-            this.addCat.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.addCat.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.addCat.Location = new System.Drawing.Point(322, 209);
-            this.addCat.Name = "addCat";
-            this.addCat.Size = new System.Drawing.Size(44, 25);
-            this.addCat.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.addCat.TabIndex = 103;
-            this.addCat.Text = "Add";
-            this.addCat.Click += new System.EventHandler(this.addCat_Click);
+            this.errorProvider1.ContainerControl = this;
             // 
             // frmAddress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(497, 465);
+            this.ClientSize = new System.Drawing.Size(515, 465);
             this.Controls.Add(this.panelEx1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -387,6 +393,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numOfMagText)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -417,6 +424,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox categoryCombo;
         private DevComponents.DotNetBar.ButtonX addCat;
-
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

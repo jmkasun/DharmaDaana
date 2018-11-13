@@ -26,3 +26,4 @@ D:\Projects Kasun\DharmaDaana\DBCore\bin\Debug\Google.Protobuf.dll
 D:\Projects Kasun\DharmaDaana\DBCore\bin\Debug\MySql.Data.xml
 D:\Projects Kasun\DharmaDaana\DBCore\obj\Debug\DBCore.dll
 D:\Projects Kasun\DharmaDaana\DBCore\obj\Debug\DBCore.pdb
+D:\Projects Kasun\DharmaDaana\DBCore\obj\Debug\DBCore.csprojResolveAssemblyReference.cache
