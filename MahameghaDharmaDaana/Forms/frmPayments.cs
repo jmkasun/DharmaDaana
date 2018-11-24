@@ -33,14 +33,15 @@ namespace YBS.Forms
                 if (ValidateBeforeAdd())
                 {
 
-                    using (MonthlyPayment pay = new MonthlyPayment(true))
+
+
+
+                    if (paymentID == 0 && monthlyAmount > 0)
                     {
-
-
-                        if (paymentID == 0 && monthlyAmount > 0)
+                        int numberofMonths = (int)amountText.Value / monthlyAmount;
+                        for (int i = 0; i < numberofMonths; i++)
                         {
-                            int numberofMonths = (int)amountText.Value / monthlyAmount;
-                            for (int i = 0; i < numberofMonths; i++)
+                            using (MonthlyPayment pay = new MonthlyPayment(true))
                             {
                                 setObjectFromFieldValues(pay, i);
 
@@ -52,13 +53,18 @@ namespace YBS.Forms
                                     //errorProvider1.SetError(nameTxt, string.Empty);
                                     statusText.Visible = true;
                                     timer1.Enabled = true;
+                                    extraAmountNum.Value = 0;
 
-                                    clear(1);
                                 }
                             }
-
                         }
-                        else if (memberID > 0)
+
+                        clear(1);
+
+                    }
+                    else if (memberID > 0)
+                    {
+                        using (MonthlyPayment pay = new MonthlyPayment(true))
                         {
                             pay.ID = paymentID;
                             setObjectFromFieldValues(pay, 0);
@@ -336,12 +342,12 @@ namespace YBS.Forms
 
         private void amountText_Leave(object sender, EventArgs e)
         {
-            calculateMonths();
+            
         }
 
         private void calculateMonths()
         {
-            if (monthlyAmount > 0)
+            if (monthlyAmount > 0 && monthCombo.SelectedIndex > -1)
             {
                 int numberofMonths = (int)amountText.Value / monthlyAmount;
                 monthslbl.Text = "";
@@ -402,6 +408,11 @@ namespace YBS.Forms
             {
                 receptNum.Visible = false;
             }
+        }
+
+        private void amountText_ValueChanged(object sender, EventArgs e)
+        {
+            calculateMonths();
         }
     }
 }

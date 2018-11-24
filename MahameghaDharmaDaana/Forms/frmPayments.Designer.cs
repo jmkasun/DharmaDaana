@@ -651,6 +651,7 @@
             0,
             0,
             0});
+            this.amountText.ValueChanged += new System.EventHandler(this.amountText_ValueChanged);
             this.amountText.Leave += new System.EventHandler(this.amountText_Leave);
             // 
             // timer1

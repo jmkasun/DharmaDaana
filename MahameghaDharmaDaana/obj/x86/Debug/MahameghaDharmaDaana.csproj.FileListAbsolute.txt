@@ -45,8 +45,8 @@ D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Forms.frmUs
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.MDIParent1.resources
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.Properties.Resources.resources
 D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\MahameghaDharmaDaana.csproj.GenerateResource.Cache
-D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\YBS.exe.config
-D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\YBS.exe
-D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\YBS.pdb
-D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.exe
-D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\YBS.pdb
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\MahameghaDharmaDaana.exe.config
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\MahameghaDharmaDaana.exe
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\bin\Debug\MahameghaDharmaDaana.pdb
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\MahameghaDharmaDaana.exe
+D:\Projects Kasun\DharmaDaana\MahameghaDharmaDaana\obj\x86\Debug\MahameghaDharmaDaana.pdb
