@@ -31,11 +31,7 @@ namespace YBS.Forms
             try
             {
                 if (ValidateBeforeAdd())
-                {
-
-
-
-
+                {                    
                     if (paymentID == 0 && monthlyAmount > 0)
                     {
                         int numberofMonths = (int)amountText.Value / monthlyAmount;
@@ -85,9 +81,13 @@ namespace YBS.Forms
 
                 }
             }
+          //  catch()
             catch (Exception ex)
             {
-                MessageView.ShowErrorMsg(ex.Message);
+                if(ex.Message.StartsWith("Duplicate entry"))
+                    MessageView.ShowErrorMsg("Already Added");
+                else
+                    MessageView.ShowErrorMsg(ex.Message);
             }
         }
 
@@ -101,6 +101,8 @@ namespace YBS.Forms
             pay.Amount = monthlyAmount;
             pay.paidDate = paidDate.Value;
             pay.ExtraAmount = (int)extraAmountNum.Value;
+            pay.paymentMethod = paymentTypeCombo.SelectedIndex;
+            pay.paymentReference = receptNum.Text;
         }
 
 
@@ -136,6 +138,8 @@ namespace YBS.Forms
             setUserPermissions();
             adhiPohoyaTick.Checked = false;
             paidDate.Value = DateTime.Now;
+            paymentTypeCombo.SelectedIndex = -1;
+            receptNum.Text = "";
         }
 
         private bool ValidateBeforeAdd()
@@ -298,6 +302,9 @@ namespace YBS.Forms
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.Id });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.Month });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.PaidDate });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.PaymentMethod == -1?"":paymentTypeCombo.Items[p.PaymentMethod] +"-"+ p.PaymentReference });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.PaymentMethod });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.PaymentReference });
 
                 dataGridView1.Rows.Add(row);
             }
@@ -396,19 +403,13 @@ namespace YBS.Forms
 
             addbtn.Text = "Update";
             amountText.Maximum = monthlyAmount;
-        }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (paymentTypeCombo.SelectedIndex == 0)
-            {
-                receptNum.Visible = true;
-            }
-            else
-            {
-                receptNum.Visible = false;
-            }
-        }
+            int payComboSelectedIndex = -1;
+            int.TryParse(Cells["paymentMethodint"].Value.ToString(), out payComboSelectedIndex);
+
+            paymentTypeCombo.SelectedIndex = payComboSelectedIndex;
+            receptNum.Text = Cells["payRef"].Value.ToString();
+        }     
 
         private void amountText_ValueChanged(object sender, EventArgs e)
         {

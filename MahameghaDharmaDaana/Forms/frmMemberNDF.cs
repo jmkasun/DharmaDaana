@@ -20,7 +20,6 @@ namespace YBS.Forms
     public partial class frmMemberNDF : Form
     {
         int memberID = 0;
-        byte[] imageData = null;
         string emailString = string.Empty;
         InputLanguage lan = null;// InputLanguage.CurrentInputLanguage;
         string nextIndex = string.Empty;
@@ -29,7 +28,6 @@ namespace YBS.Forms
         DBCore.UserLevel userLevel = DBCore.UserLevel.SystemUser;
         int magazinePrice = 0;
         string note;
-        int sentAddressId = 0;
 
 
         public frmMemberNDF(int permissionLevel)
@@ -176,7 +174,6 @@ namespace YBS.Forms
             nameTextBoxX.Focus();
             numOfMag.Value = 0;
             note = "";
-            sentAddressId = 0;
 
             SetIndexField();
         }
@@ -765,7 +762,6 @@ namespace YBS.Forms
             sentaAddressTextbox.Clear();
             numOfMagText.Value = 1;
             sentaAddressTextbox.Select();
-            sentAddressId = 0;
         }
 
         private void amountTxt_Enter(object sender, EventArgs e)

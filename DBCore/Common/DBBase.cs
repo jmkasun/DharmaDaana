@@ -97,7 +97,7 @@ namespace DBCore.Common
         {
             setCommandProperties(SQL);
 
-            int res = command.ExecuteNonQuery();
+                int res = command.ExecuteNonQuery();
            // command.Parameters.Clear();
             return res;
         }

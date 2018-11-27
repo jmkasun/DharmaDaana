@@ -60,7 +60,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.sentaAddressTextbox = new System.Windows.Forms.TextBox();
             this.adressGrid = new System.Windows.Forms.DataGridView();
+            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numOfMagText = new System.Windows.Forms.NumericUpDown();
+            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             this.addressAddBtn = new DevComponents.DotNetBar.ButtonX();
             this.amountTxt = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -81,11 +86,6 @@
             this.prevBtn = new DevComponents.DotNetBar.ButtonX();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             this.groupPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numOfMag)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -166,14 +166,14 @@
             // numOfMag
             // 
             this.numOfMag.Font = new System.Drawing.Font("Arial", 12F);
-            this.numOfMag.Location = new System.Drawing.Point(320, 309);
+            this.numOfMag.Location = new System.Drawing.Point(333, 309);
             this.numOfMag.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.numOfMag.Name = "numOfMag";
-            this.numOfMag.Size = new System.Drawing.Size(63, 26);
+            this.numOfMag.Size = new System.Drawing.Size(49, 26);
             this.numOfMag.TabIndex = 7;
             this.numOfMag.Enter += new System.EventHandler(this.numOfMagText_Enter);
             // 
@@ -221,7 +221,7 @@
             this.label15.Font = new System.Drawing.Font("UN-Emanee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.Location = new System.Drawing.Point(223, 312);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(106, 18);
+            this.label15.Size = new System.Drawing.Size(114, 18);
             this.label15.TabIndex = 94;
             this.label15.Text = "සඟරා ප්‍රමාණය";
             // 
@@ -442,6 +442,40 @@
             this.adressGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.adressGrid_CellMouseDoubleClick);
             this.adressGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tagGrid_KeyUp);
             // 
+            // address
+            // 
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.address.DefaultCellStyle = dataGridViewCellStyle1;
+            this.address.FillWeight = 149.2386F;
+            this.address.HeaderText = "ලිපිනය";
+            this.address.Name = "address";
+            this.address.ReadOnly = true;
+            // 
+            // ID
+            // 
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ID.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // numberCol
+            // 
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numberCol.DefaultCellStyle = dataGridViewCellStyle3;
+            this.numberCol.FillWeight = 50.76142F;
+            this.numberCol.HeaderText = "සඟරා ගණන";
+            this.numberCol.Name = "numberCol";
+            this.numberCol.ReadOnly = true;
+            // 
+            // type
+            // 
+            this.type.HeaderText = "type";
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            this.type.Visible = false;
+            // 
             // numOfMagText
             // 
             this.numOfMagText.Font = new System.Drawing.Font("Arial", 12F);
@@ -460,6 +494,19 @@
             0,
             0});
             this.numOfMagText.Enter += new System.EventHandler(this.numOfMagText_Enter);
+            // 
+            // buttonX2
+            // 
+            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX2.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonX2.Location = new System.Drawing.Point(342, 145);
+            this.buttonX2.Name = "buttonX2";
+            this.buttonX2.Size = new System.Drawing.Size(65, 29);
+            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX2.TabIndex = 91;
+            this.buttonX2.Text = "Clear";
+            this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
             // 
             // addressAddBtn
             // 
@@ -720,53 +767,6 @@
             // 
             this.timer1.Interval = 2000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // address
-            // 
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.address.DefaultCellStyle = dataGridViewCellStyle1;
-            this.address.FillWeight = 149.2386F;
-            this.address.HeaderText = "ලිපිනය";
-            this.address.Name = "address";
-            this.address.ReadOnly = true;
-            // 
-            // ID
-            // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ID.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // numberCol
-            // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numberCol.DefaultCellStyle = dataGridViewCellStyle3;
-            this.numberCol.FillWeight = 50.76142F;
-            this.numberCol.HeaderText = "සඟරා ගණන";
-            this.numberCol.Name = "numberCol";
-            this.numberCol.ReadOnly = true;
-            // 
-            // type
-            // 
-            this.type.HeaderText = "type";
-            this.type.Name = "type";
-            this.type.ReadOnly = true;
-            this.type.Visible = false;
-            // 
-            // buttonX2
-            // 
-            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX2.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonX2.Location = new System.Drawing.Point(342, 145);
-            this.buttonX2.Name = "buttonX2";
-            this.buttonX2.Size = new System.Drawing.Size(65, 29);
-            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX2.TabIndex = 91;
-            this.buttonX2.Text = "Clear";
-            this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
             // 
             // frmMemberNDF
             // 

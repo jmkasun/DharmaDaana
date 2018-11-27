@@ -16,6 +16,9 @@ namespace DBCore.Classes
         public int Amount;
         public DateTime paidDate;
         public int ExtraAmount;
+        public int paymentMethod;
+        public string paymentReference;
+
 
         public MonthlyPayment()
         {
@@ -35,6 +38,8 @@ namespace DBCore.Classes
             AddParameter("@P_amount", Amount);
             AddParameter("@p_paidDate", paidDate.Date);
             AddParameter("@P_extraAmount", ExtraAmount);
+            AddParameter("@P_paymentMethod", paymentMethod);
+            AddParameter("@P_paymentReference", paymentReference);
 
             return ExecuteNonQueryOutput("payments_Add");
         }
@@ -57,6 +62,8 @@ namespace DBCore.Classes
             AddParameter("@P_amount", Amount);
             AddParameter("@p_paidDate", paidDate.Date);
             AddParameter("@P_extraAmount", ExtraAmount);
+            AddParameter("@P_paymentMethod", paymentMethod);
+            AddParameter("@P_paymentReference", paymentReference);
 
             return ExecuteNonQueryOutput("payment_upd");
         }
@@ -79,7 +86,8 @@ namespace DBCore.Classes
                 while (reader.Read())
                 {
                     histry.Add(new PaymentHistry(reader.GetInt32(0), reader.GetDateTime(1),
-                        reader.GetInt32(2), reader.GetInt32(3), reader[4] == DBNull.Value ? new DateTime() : reader.GetDateTime(4)));
+                        reader.GetInt32(2), reader.GetInt32(3), reader[4] == DBNull.Value ? new DateTime() : reader.GetDateTime(4),
+                       reader[5]==DBNull.Value?-1:reader.GetInt32(5), reader[6] == DBNull.Value ? "" : reader.GetString(6)));
                 }
             }
 
@@ -94,14 +102,18 @@ namespace DBCore.Classes
         public int Amount;
         public int ExtraAmount;
         public DateTime PaidDate;
+        public int PaymentMethod;
+        public string PaymentReference;
 
-        public PaymentHistry(int id, DateTime month,int amount, int extraAmount,DateTime paidDate)
+        public PaymentHistry(int id, DateTime month,int amount, int extraAmount,DateTime paidDate, int paymentMethod, string paymentReference)
         {
             Id = id;
             Month = month;
             Amount = amount;
             ExtraAmount = extraAmount;
             PaidDate = paidDate;
+            PaymentMethod = paymentMethod;
+            PaymentReference = paymentReference;
         }
     }
 }
